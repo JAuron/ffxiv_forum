@@ -1,0 +1,20 @@
+
+ 
+<table class="table table-bordered">
+  <tr>
+    <th width="70%">Forum</th>
+    <th width="30%">Last Post</th>
+  </tr>
+  <% for section in @sections %>
+    <tr>
+      <td><h4><%= link_to h(section.title), section_path(section.id) %></h4>
+        <small><%= section.topics.count %> topics</small><br />
+      <td class="right"></td>
+      <td><%= link_to "Show", section_path(section) %></td>
+      <td><%= link_to "Edit", edit_section_path(section) %></td>
+      <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+ 
+<p><%= link_to "New Section", new_topic_path %></p>

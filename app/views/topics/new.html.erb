@@ -1,0 +1,9 @@
+<%= form_for :topic, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <% if params[:section] %><input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" /><% end %>
+  <% if current_user %>
+  	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
+  <% end %>
+    <%= f.text_field :title %>
+    <%= f.submit "Create" %>
+	<textarea name="post[text]" cols="80" rows="20"><%= @post.text %></textarea>
+<% end %>
