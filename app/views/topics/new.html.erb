@@ -1,5 +1,7 @@
 <%= form_for :topic, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-  <% if params[:section] %><input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" /><% end %>
+  <% if params[:section] %>
+  	<input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" />
+  <% end %>
   <% if current_user %>
   	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
   <% end %>

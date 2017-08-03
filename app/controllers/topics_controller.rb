@@ -5,6 +5,7 @@ class TopicsController < ApplicationController
 
 	def show
 		@topic = Topic.find(params[:id])
+		@posts = Post.where(topic_id: params[:id]).order(created_at: :asc)
 	end
 
 	def edit
@@ -21,12 +22,12 @@ class TopicsController < ApplicationController
 	def create
 	  @topic = Topic.new(params.require(:topic).permit(:title, :section_id, :user_id))
 	  if @topic.save
-		params[:post][:topic_id] = @topic.id, 
-		params[:post][:user_id] = current_user.id
-		@post = Post.new(params.require(:post).permit(:text, :topic_id, :user_id))
+		params[:post][:topic_id] = @topic.id
+		params[:post][:user_id] = @topic.user_id
+ 		@post = Post.new(params.require(:post).permit(:text, :topic_id, :user_id))
 	    if @post.save
 	      flash[:notice] = "Successfully created topic."
-	      redirect_to "/forums/#{@topic.forum_id}"
+	      redirect_to "/forum/#{@topic.section_id}"
 	    else
 	      redirect_to :action => 'new'
 	    end

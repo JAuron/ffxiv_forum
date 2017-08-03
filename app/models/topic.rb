@@ -14,4 +14,8 @@ class Topic < ApplicationRecord
 	belongs_to :user
 	belongs_to :section
 	has_many :posts, :dependent => :destroy
+
+	def init
+		self.section_id ||= 0 
+	end
 end

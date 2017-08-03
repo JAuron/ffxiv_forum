@@ -1,0 +1,7 @@
+<%= form_for :section, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+  <% if params[:section] %>
+  	<input type="hidden" id="section_parent_section_id" name="section[parent_section_id]" value="<%= params[:section] %>" />
+  <% end %>
+    <%= f.text_field :title %>
+    <%= f.submit "Create" %>
+<% end %>

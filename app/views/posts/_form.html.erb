@@ -1,0 +1,11 @@
+<%= form_for @post do |f| %>
+</br>
+  <% if params[:topic] %>
+  	<input type="hidden" id="post_topic_id" name="post[topic_id]" value="<%= params[:topic] %>" />
+  <% end %>
+  <% if current_user %>
+  	<input type="hidden" id="post_user_id" name="post[user_id]" value="<%= current_user.id %>" />
+  <% end %>
+    <%= f.text_area :text %>
+    <%= f.submit "Create" %>
+<% end %>

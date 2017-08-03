@@ -8,8 +8,9 @@
   </tr>
   <% for topic in @section.topics %>
     <tr>
-      <td><%= link_to h(topic.name), topic_path(topic.id) %>
+      <td><%= link_to h(topic.title), topic_path(topic.id) %>
       <td><%= topic.posts.count %></td>
+      <td><%= "@#{topic.posts.last.created_at} By #{topic.posts.last.user_id}" %></td>
       <td class="right"></td>
       <td><%= link_to "Show", topic %></td>
       <td><%= link_to "Edit", edit_topic_path(topic) %></td>
