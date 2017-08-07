@@ -1,4 +1,5 @@
-<% @topic.title  %>
+<p><%= backchain(@topic.section_id) %></p>
+<p><%= @topic.title  %></p>
  
 <table class="table table-bordered">
   <tr>
@@ -9,11 +10,10 @@
     <tr>
       <td><%= post.user_id %>
       <td><%= post.text %></td>
-      <td class="right"></td>>
+      <td class="right"></td>
       <td><%= link_to "Edit", edit_post_path(post) %></td>
       <td><%= link_to "Destroy", post, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
 </table>
 <p><%= link_to "New Post", "/posts/new?topic=#{@topic.id}" %></p>
-

@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726154557) do
+ActiveRecord::Schema.define(version: 20170804151738) do
+
+  create_table "lodestones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "title"
+    t.string "server"
+    t.string "free_company"
+    t.string "portrait"
+    t.string "avatar"
+    t.text "active_class"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "topic_id"

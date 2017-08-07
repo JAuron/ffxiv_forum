@@ -14,8 +14,10 @@ class User < ApplicationRecord
 	has_secure_password
 	has_many :topics
 	has_many :posts
+	belongs_to :lodestone
 
   email_regex = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: {within: 7..254}, format: {with: email_regex}, uniqueness: true
-  validates :lodestone_id, presence: true, length: {is: 6}, uniqueness: true
+  validates :lodestone_id, presence: true, uniqueness: true
+
 end

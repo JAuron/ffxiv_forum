@@ -1,4 +1,5 @@
-<% @section.title  %>
+<p><%= backchain(@section.parent_section_id) %></p>
+<p><%= @section.title %></p>
  
 <table class="table table-bordered">
   <tr>
@@ -10,7 +11,7 @@
     <tr>
       <td><%= link_to h(topic.title), topic_path(topic.id) %>
       <td><%= topic.posts.count %></td>
-      <td><%= "@#{topic.posts.last.created_at} By #{topic.posts.last.user_id}" %></td>
+      <td><%= "@#{topic.posts.last.created_at} By #{topic.posts.last.user_id}" if topic.posts.last %></td>
       <td class="right"></td>
       <td><%= link_to "Show", topic %></td>
       <td><%= link_to "Edit", edit_topic_path(topic) %></td>
