@@ -1,12 +1,17 @@
 <h1>Signup!</h1>
-
 <%= form_for :user, url: '/users' do |f| %>
 
   Email: <%= f.text_field :email %>
   Password: <%= f.password_field :password %>
   Password Confirmation: <%= f.password_field :password_confirmation %>
   Lodestone ID: <%= f.number_field :lodestone_id %>
-
+  <p>
+  Roles:
+  <% Role.all.each do |role| %>
+  	<%= role.name %>
+  	<%= check_box("user", "roles", {multiple: true}, role.id, nil) %>
+  <% end %>
+  </p>
   <%= f.submit "Submit" %>
 
 <% end %>

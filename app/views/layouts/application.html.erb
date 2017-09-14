@@ -8,13 +8,31 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
+<nav class="nav navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">Narshe Red Wings</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="<%= 'active' if params[:controller] == 'homepage' %>"><a href="/">Homepage</a></li>
+      <li class="<%= 'active' if params[:controller] == 'sections' %>"><a href="/forum">Forum</a></li>
+    </ul>
 
-<% if current_user %>
-  Signed in as <%= current_user.lodestone.name %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>
+    <% if current_user %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to current_user.lodestone.name, '/' %> </li>
+        <li><%= image_tag current_user.lodestone.avatar, size: 50 %></li>
+        <li><%= link_to "Logout", '/logout' %></li>
+      </ul> 
+    <% else %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'Login', '/login' %></li>
+        <li><%= link_to 'Signup', '/signup' %></li>
+      </ul>
+    <% end %>
 
+  </div>
+</nav>
 <%= yield %>
 
 </body>

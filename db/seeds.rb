@@ -7,3 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 forum_home = Section.create(id: 0, title: 'Home')
+
+roles_list = [
+								"admin",
+								"red_wing",
+								"friend_wing",
+								"engineer",
+								"gardener",
+								"guest"
+						 ]
+
+roles_list.each do |name|
+  Role.create( name: name )
+end
