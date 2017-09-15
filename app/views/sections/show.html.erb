@@ -5,42 +5,6 @@
   <br />
     <div class=" panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Topics </h3>
-      </div>
-      <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th width="60%">Title</th>
-          <th width="10%">Replies</th>
-          <th width="30%">Last Post</th>
-          <% if current_user.has_role?("admsin") %>
-            <th colspan="2"></th>
-          <% end %>
-        </tr>
-        </thead>
-        <tbody>
-        <% for topic in @topics %>
-          <tr>
-            <td><%= link_to h(topic.title), topic_path(topic.id) %></td>
-            <td><%= topic.posts.count %></td>
-            <td>
-              <%if topic.posts.last %>
-              <i><%= time_formatter(topic.posts.last.created_at)%></i> <BR> 
-              By: <%= link_to topic.posts.last.user.lodestone.name, topic.posts.last.user %>
-              <% end %>
-            </td>
-            <% if current_user.has_role?("admisn") %>
-              <td><%= link_to "Edit", edit_topic_path(topic) %></td>
-              <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
-            <% end %>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class=" panel panel-default">
-      <div class="panel-heading">
         <h3 class="panel-title">Subsections</h3>
       </div>
       <table class="table table-bordered table-hover">
@@ -48,7 +12,7 @@
           <tr>
             <th width="70%">Name</th>
             <th width="30%">Last Post</th>
-            <% if current_user.has_role?("admisn") %>
+            <% if current_user.has_role?("admin") %>
               <th colspan="2"></th>
             <% end %>
           </tr>
@@ -67,13 +31,49 @@
                   By: <%= link_to last_post.user.lodestone.name, last_post.user %> <BR>
                 <% end %>
               </td>
-              <% if current_user.has_role?("admisn") %>
+              <% if current_user.has_role?("admin") %>
                 <td><%= link_to "Edit", edit_section_path(section) %></td>
-               <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
+                <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
               <% end %>
             </tr>
           <% end %>
           </tbody>
+      </table>
+    </div>
+
+    <div class=" panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Topics </h3>
+      </div>
+      <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th width="60%">Title</th>
+          <th width="10%">Replies</th>
+          <th width="30%">Last Post</th>
+          <% if current_user.has_role?("admin") %>
+            <th colspan="2"></th>
+          <% end %>
+        </tr>
+        </thead>
+        <tbody>
+        <% for topic in @topics %>
+          <tr>
+            <td><%= link_to h(topic.title), topic_path(topic.id) %></td>
+            <td><%= topic.posts.count %></td>
+            <td>
+              <%if topic.posts.last %>
+              <i><%= time_formatter(topic.posts.last.created_at)%></i> <BR> 
+              By: <%= link_to topic.posts.last.user.lodestone.name, topic.posts.last.user %>
+              <% end %>
+            </td>
+            <% if current_user.has_role?("admin") %>
+              <td><%= link_to "Edit", edit_topic_path(topic) %></td>
+              <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        </tbody>
       </table>
     </div>
    

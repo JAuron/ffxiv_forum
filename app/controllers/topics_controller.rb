@@ -9,7 +9,17 @@ class TopicsController < ApplicationController
 	end
 
 	def edit
+		@topic = Topic.find(params[:id])
 	end
+
+	def update
+    @topic = Topic.find(params[:id])
+    if @topic.update(topic_params)
+      redirect_to "/topics/#{@topic.id}"
+    else
+      render :action => :edit
+    end
+  end
 
 	def destroy
 	end
@@ -20,7 +30,7 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-	  @topic = Topic.new(params.require(:topic).permit(:title, :section_id, :user_id))
+	  @topic = Topic.new(topic_params)
 	  if @topic.save
 		params[:post][:topic_id] = @topic.id
 		params[:post][:user_id] = @topic.user_id
@@ -34,5 +44,11 @@ class TopicsController < ApplicationController
 	  else
 	    render :action => 'new'
 	  end
+	end
+
+	private
+
+	def topic_params
+		params.require(:topic).permit(:title, :section_id, :user_id)
 	end
 end

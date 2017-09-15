@@ -1,0 +1,10 @@
+<%= form_for @topic do |f| %>
+  <% if params[:section] %>
+  	<input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" />
+  <% end %>
+  <% if current_user %>
+  	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
+  <% end %>
+    <%= f.text_field :title %>
+    <%= f.submit "Create" %>
+<% end %>

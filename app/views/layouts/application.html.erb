@@ -15,7 +15,7 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="<%= 'active' if params[:controller] == 'homepage' %>"><a href="/">Homepage</a></li>
-      <li class="<%= 'active' if params[:controller] == 'sections' %>"><a href="/forum">Forum</a></li>
+      <li class="<%= 'active' if params[:controller] == 'sections'||'topics' %>"><a href="/forum">Forum</a></li>
     </ul>
 
     <% if current_user %>

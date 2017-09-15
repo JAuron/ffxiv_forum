@@ -1,10 +1,24 @@
 <h1>Signup!</h1>
+<div class="container">
 <%= form_for :user, url: '/users' do |f| %>
 
-  Email: <%= f.text_field :email %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  Lodestone ID: <%= f.number_field :lodestone_id %>
+  <div class="form-group col-sm-6">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email">
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="email">Lodestone ID</label>
+    <input type="integer" class="form-control" name="user[lodestone_id]" id="user_lodestone_id" placeholder="Enter Lodestone ID">
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+  </div>
+  <div class="form-group col-sm-6">
+    <label for="password">Password Confirmation</label>
+    <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
+  </div>
+
   <p>
   Roles:
   <% Role.all.each do |role| %>
@@ -15,3 +29,4 @@
   <%= f.submit "Submit" %>
 
 <% end %>
+</div>
