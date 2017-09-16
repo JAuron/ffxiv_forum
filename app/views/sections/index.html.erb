@@ -40,7 +40,14 @@
 
     <div class=" panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Subsections</h3>
+        <div class="row">
+          <h3 class="col-md-4 text-left panel-title">Subsections</h3>
+          <% if current_user.has_role?("admin")%>
+            <div class="col-md-8 text-right">
+              <a class="btn btn-info" href=<%= new_section_path(section: 0) %> role="button">New Section</a>
+            </div>
+          <% end %>
+        </div>
       </div>
       <table class="table table-bordered table-hover">
         <thead>
@@ -76,7 +83,7 @@
       </table>
     </div>
    
-    <p><%= link_to "New Section", new_section_path(section: 0) %></p>
     <p><%= link_to "New Topic", new_topic_path(section: 0) %></p>
+    <p><%= link_to "New Section", new_section_path(section: 0) %></p>
   </div>
 </body>

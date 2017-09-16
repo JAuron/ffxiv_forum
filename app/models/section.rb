@@ -15,5 +15,5 @@ class Section < ApplicationRecord
 	has_many :topics, :dependent => :destroy
 
 	has_many :children, class_name: "Section", foreign_key: "parent_section_id"
-	belongs_to :parent, class_name: "Section", foreign_key: "parent_section_id"
+	has_one :parent, class_name: "Section", foreign_key: "parent_section_id"
 end

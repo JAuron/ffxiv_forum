@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-forum_home = Section.create(id: 0, title: 'Home')
+forum_home = Section.create!(id: 0, title: 'Home')
 
 roles_list = [
 								"admin",
