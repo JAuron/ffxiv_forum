@@ -17,6 +17,11 @@ class UsersController < ApplicationController
 	    redirect_to '/signup'
 	  end
 	end
+
+  def show
+    @user = User.find(params[:id])
+    @lodestone_data = @user.lodestone
+  end
  
   private
 

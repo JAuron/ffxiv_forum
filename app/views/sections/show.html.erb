@@ -1,50 +1,65 @@
-<head><p><%= backchain(@section.parent_section_id) %></p>
-  <h1><%= @section.title.capitalize %></h1></head>
+<head><h4><%= backchain(@section.parent_section_id) %></h4>
+  <h1><%= @section.title %></h1></head>
 <body>
   <div class="container">
   <br />
-    <div class=" panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Subsections</h3>
-        <p><%= link_to "New Section", new_section_path(section: 0), align: 'right' %></p>
-      </div>
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th width="70%">Name</th>
-            <th width="30%">Last Post</th>
-            <% if current_user.has_role?("admin") %>
-              <th colspan="2"></th>
+    <% if @section.children.present? || current_user.has_role?('admin') %>
+      <div class=" panel panel-default">
+        <div class="panel-heading">
+          <div class="row">
+            <h4 class="col-md-4 text-left">Sections</h4>
+            <% if current_user.has_role?("admin")%>
+              <div class="col-md-8 text-right">
+                <a class="btn btn-info" href=<%= new_section_path(section: @section.id) %> role="button">New Section</a>
+              </div>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <% for section in @sections %>
-            <% section_topics = section_topics(section.id) %>
-            <% last_post = last_post(section_topics) %>
+          </div>
+        </div>
+        <table class="table table-bordered table-hover">
+          <thead>
             <tr>
-              <td><h4><%= link_to h(section.title), section_path(section.id) %></h4>
-                <small><%= section_topics.count %> topics</small><br /></td>
-              <td>
-                <% if last_post %>
-                  <i><%= time_formatter(last_post.created_at)%></i> <BR> 
-                  In: <%= link_to last_post.topic.title, last_post.topic %> <BR>
-                  By: <%= link_to last_post.user.lodestone.name, last_post.user %> <BR>
-                <% end %>
-              </td>
+              <th width="70%">Name</th>
+              <th width="30%">Last Post</th>
               <% if current_user.has_role?("admin") %>
-                <td><%= link_to "Edit", edit_section_path(section) %></td>
-                <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
+                <th colspan="2"></th>
               <% end %>
             </tr>
-          <% end %>
-          </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            <% for section in @sections %>
+              <% section_topics = section_topics(section.id) %>
+              <% last_post = last_post(section_topics) %>
+              <tr>
+                <td><h4><%= link_to h(section.title), section_path(section.id) %></h4>
+                  <small><%= section_topics.count %> topics</small><br /></td>
+                <td>
+                  <% if last_post %>
+                    <i><%= time_formatter(last_post.created_at)%></i> <BR> 
+                    In: <%= link_to last_post.topic.title, last_post.topic %> <BR>
+                    By: <%= link_to last_post.user.lodestone.name, last_post.user %> <BR>
+                  <% end %>
+                </td>
+                <% if current_user.has_role?("admin") %>
+                  <td><%= link_to "Edit", edit_section_path(section) %></td>
+                 <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
+                <% end %>
+              </tr>
+            <% end %>
+            </tbody>
+        </table>
+      </div>
+    <% end %>
 
     <div class=" panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Topics </h3>
+        <div class="row">
+          <h4 class="col-md-4 text-left">Topics</h4>
+          <% if current_user.has_role?("admin")%>
+            <div class="col-md-8 text-right">
+              <a class="btn btn-info" href=<%= new_topic_path(section: @section.id) %> role="button">New Topic</a>
+            </div>
+          <% end %>
+        </div>
       </div>
       <table class="table table-bordered table-hover">
       <thead>
@@ -77,7 +92,5 @@
         </tbody>
       </table>
     </div>
-   
-    <p><%= link_to "New Topic", new_topic_path(section: 0) %></p>
   </div>
 </body>

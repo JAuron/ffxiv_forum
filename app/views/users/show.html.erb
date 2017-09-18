@@ -1,0 +1,19 @@
+<head><h1><%= @lodestone_data.name %></h1></head>
+<BR />
+<body>
+  <div class="container">
+    <div class="row">
+      <div class=" panel panel-default ">
+        <div class="panel-body">
+          <%= image_tag @lodestone_data.portrait, class: 'col-md-4' %>
+          <div class="panel col-md-8">
+            Title: <%= @lodestone_data.title %> <br/>
+
+            Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
+            <%= user_last_post(@user).created_at %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>>

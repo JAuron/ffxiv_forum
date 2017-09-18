@@ -8,6 +8,9 @@ class SectionsController < ApplicationController
 	end
 
 	def show
+		if params[:id] == '0'
+			redirect_to '/forum'
+		end
 		@section = Section.find(params[:id])
 		@sections = Section.where(parent_section_id: @section.id)
 		@topics = Topic.where(section_id: @section.id)
@@ -17,6 +20,11 @@ class SectionsController < ApplicationController
 	end
 
 	def destroy
+		unless params[:id] == 0
+			@section = Section.find(params[:id])
+	    @section.destroy
+	    redirect_to "/forum/#{@section.parent_section_id}"
+	  end
 	end
 
 	def new

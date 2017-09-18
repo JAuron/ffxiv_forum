@@ -16,6 +16,6 @@ module NavigationHelper
 			chain_links << section_linker(section.id).html_safe
 			section_id = section.parent_section_id
 		end
-		chain_links.reverse.join(' > ').html_safe
+		chain_links.reverse.join(' > ').html_safe + ' >'
 	end
 end

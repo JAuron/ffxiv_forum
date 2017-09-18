@@ -22,6 +22,9 @@ class TopicsController < ApplicationController
   end
 
 	def destroy
+		@topic = Topic.find(params[:id])
+    @topic.destroy
+    redirect_to "/forum/#{@topic.section_id}"
 	end
 
 	def new
