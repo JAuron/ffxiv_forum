@@ -9,7 +9,7 @@
 #  free_company :string(255)
 #  portrait     :string(255)
 #  avatar       :string(255)
-#  active_class :text(65535)
+#  class_data   :text(65535)
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

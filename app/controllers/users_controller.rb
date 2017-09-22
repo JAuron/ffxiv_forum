@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   		free_company: nil,
   		portrait: data["portrait"],
   		avatar: data["avatar"],
-  		active_class: data["data"]["active_class"]
+  		class_data: data["data"]["classjobs"]
   	).save!
   end
 
@@ -50,6 +50,18 @@ class UsersController < ApplicationController
   	roles_array.each do |role_id|
   		UserRoleAssignment.new(user_id: user_id, role_id: role_id).save!
   	end
+  end
+
+  def user_class_data(classdata)
+    compressed_data = []
+    classdata.each do |class_data|
+      data = {c_name: class_data.last["name"], level: class_data.last["level"]}
+      compressed_data << data
+    end
+    return compressed_data
+  end 
+
+  def class_data_cleaner
   end
 
 end

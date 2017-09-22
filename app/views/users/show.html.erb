@@ -8,9 +8,20 @@
           <%= image_tag @lodestone_data.portrait, class: 'col-md-4' %>
           <div class="panel col-md-8">
             Title: <%= @lodestone_data.title %> <br/>
-
-            Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
-            <%= user_last_post(@user).created_at %>
+            <div class=" panel panel-default ">
+        <div class="panel-body">
+            <% JSON.parse(@lodestone_data.class_data).each do |c| %>
+              <%= image_tag "#{c['icon']}.png" %>
+              <%= c["level"] %>
+              <br/>
+            <% end %>
+            <%=@lodestone_data.class_data%>
+          </div>
+        </div>
+            <% if user_last_post(@user) %>
+              Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
+              <%= time_formatter(user_last_post(@user).created_at) %>
+            <% end %>
           </div>
         </div>
       </div>
