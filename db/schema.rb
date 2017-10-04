@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170922133421) do
     t.integer "xivdb_id"
     t.string "name"
     t.string "icon_url"
+    t.string "classification"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

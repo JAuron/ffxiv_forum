@@ -4,6 +4,7 @@ class CreateClassLookups < ActiveRecord::Migration[5.1]
       t.integer :xivdb_id
       t.string :name
       t.string :icon_url
+      t.string :classification
 
       t.timestamps
     end

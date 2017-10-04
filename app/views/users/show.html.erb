@@ -9,15 +9,45 @@
           <div class="panel col-md-8">
             Title: <%= @lodestone_data.title %> <br/>
             <div class=" panel panel-default ">
-        <div class="panel-body">
-            <% JSON.parse(@lodestone_data.class_data).each do |c| %>
-              <%= image_tag "#{c['icon']}.png" %>
-              <%= c["level"] %>
-              <br/>
-            <% end %>
-            <%=@lodestone_data.class_data%>
-          </div>
-        </div>
+              <div class="panel-body">
+                <div class="row">
+                  <% JSON.parse(@lodestone_data.class_data)['Tank'].each do |tank| %>
+                   <div class="col-sm-1 padding-0"> <%= image_tag tank["icon"], size: 25 %>
+                    <center><%= tank["level"] %></center></div>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <% JSON.parse(@lodestone_data.class_data)['Healer'].each do |healer| %>
+                    <div class="col-sm-1"><center><%= image_tag healer["icon"], size: 25 %>
+                    <%= healer["level"] %></center></div>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
+                    <div class="col-sm-1"><%= image_tag ranged["icon"], size: 25 %>
+                    <center><%= ranged["level"] %></center></div>
+                  <% end %>
+                </div>
+                  <br/>
+                  <br/>
+                  <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
+                    <%= image_tag ranged["icon"], size: 25 %>
+                    <%= ranged["level"] %>
+                  <% end %>
+                  <% JSON.parse(@lodestone_data.class_data)['Caster'].each do |caster| %>
+                    <%= image_tag caster["icon"], size: 25 %>
+                    <%= caster["level"] %>
+                  <% end %>
+                  <br/>
+                  <br/>
+                  <% JSON.parse(@lodestone_data.class_data)['Melee'].each do |melee| %>
+                    <%= image_tag melee["icon"], size: 25 %>
+                    <%= melee["level"] %>
+                  <% end %>
+                  <br/>
+                  <br/>
+                </div>
+              </div>
             <% if user_last_post(@user) %>
               Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
               <%= time_formatter(user_last_post(@user).created_at) %>
@@ -27,4 +57,4 @@
       </div>
     </div>
   </div>
-</body>>
+</body>
