@@ -3,12 +3,15 @@ class UsersController < ApplicationController
   def new
   end
 
+  # New method of identify lodestone, loads up an image and details that the user is linking the correct account
+  # If yes, user.save
+  # If no then user submits a better name and searches again OR submits the user id from lodestone
   def create
     if session[:user_id].present?
     	redirect_to '/'
     end
 	  @user = User.new(user_params)
-	  create_lodestone(@user.lodestone_id)
+	  create_lodestone(@user.lodestone_url)
 	  if @user.save
 	  	assign_roles(params[:user][:roles], @user.id)
 	    session[:user_id] = @user.id
@@ -29,13 +32,20 @@ class UsersController < ApplicationController
 	  params.require(:user).permit(:lodestone_id, :email, :password, :password_confirmation)
 	end
 
-	def create_lodestone(lodestone_id)
-  	url = "https://api.xivdb.com/character/#{lodestone_id}"
-  	resp = Net::HTTP.get_response(URI.parse(url))
+  def identify_lodestone(name)
+    url = "https://api.xivdb.com/search?one=characters&server%7Cet=Moogle&string=#{name}&limit=1"
+    resp = Net::HTTP.get_response(URI.parse(url))
+    return false if resp.code == "404"
+    data = JSON.parse(resp.body)
+    data["characters"]["results"].first
+  end
+
+	def create_lodestone(lodestone_url)
+  	resp = Net::HTTP.get_response(URI.parse(lodestone_url))
   	return false if resp.code == "404"
   	data = JSON.parse(resp.body)
   	Lodestone.new(
-  		id: lodestone_id,
+  		id: data["lodestone_id"],
   		name: data["name"],
   		title: data["data"]["title"],
   		server: data["server"],
