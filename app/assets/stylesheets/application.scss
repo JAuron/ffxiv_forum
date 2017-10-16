@@ -31,5 +31,7 @@ $btn-info-bg: #323232;
     padding-left:0;
 };
 
+@import "select2";
+@import "select2-bootstrap";
 @import "bootstrap-sprockets";
 @import "bootstrap";

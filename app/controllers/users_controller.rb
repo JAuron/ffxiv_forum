@@ -32,12 +32,12 @@ class UsersController < ApplicationController
 	  params.require(:user).permit(:lodestone_id, :email, :password, :password_confirmation)
 	end
 
-  def identify_lodestone(name)
-    url = "https://api.xivdb.com/search?one=characters&server%7Cet=Moogle&string=#{name}&limit=1"
+  def get_user_lodestone_data(name)
+    url = "https://xivsync.com/character/search?server=Moogle&name=#{name}"
     resp = Net::HTTP.get_response(URI.parse(url))
     return false if resp.code == "404"
     data = JSON.parse(resp.body)
-    data["characters"]["results"].first
+    render :partial=>"users/possible_characters", :layout => false, :data => data["data"]["results"]
   end
 
 	def create_lodestone(lodestone_url)
@@ -71,7 +71,5 @@ class UsersController < ApplicationController
     return compressed_data
   end 
 
-  def class_data_cleaner
-  end
 
 end
