@@ -36,6 +36,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 
 # Use to lookup character details for signup
+gem "jquery-rails"
 gem "select2-rails"
 
 group :development, :test do
