@@ -61,6 +61,17 @@ module ApplicationHelper
 		a = [tanks,healers,ranged,casters,melee]
 	end
 
+	def post_user_name(post)
+		if post.user
+			if post.user.lodestone
+				post.user.lodestone.name
+			else
+				post.user.email
+			end
+		else
+			"<i>USER DELETED</i>".html_safe
+		end
+	end
 
 #keep for testing purposes, should be removed once user data is recreated
 	def user_class_data(classdata)

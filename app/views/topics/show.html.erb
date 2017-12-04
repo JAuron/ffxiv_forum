@@ -5,16 +5,23 @@
       <div class="panel-heading" align="center">
         <h1><%= @topic.title %></h1>
       </div>
-<table class="table">
+<table class="table table-hover">
 
   <% for post in @posts %>
     <tr>
-      <td width="20%"><%= post.user.lodestone.name %> <BR/><BR/> <%= image_tag post.user.lodestone.avatar %></td>
-      <td width="80%"><%= post.text %></td>
-      <% if post.user.has_role?("admsn") || current_user == post.user %>
-        <td><%= link_to "Edit", edit_post_path(post) %></td>
-        <td><%= link_to "Delete", post, :confirm => 'Are you sure?', :method => :delete %></td>
-      <% end %>
+      <td width="20%"><%= post_user_name(post) %> <BR/><BR/> <%= image_tag post.user.lodestone.avatar if post.user %></td>
+      <td width="80%">
+        <div>
+          <%= post.text %>
+        </div>
+        <% if current_user.has_role?("admin") || current_user == post.user %>
+        <div>
+          <%= link_to "Edit", edit_post_path(post), class:'pull-right' %>
+          <BR/>
+          <%= link_to "Delete", post, :confirm => 'Are you sure?', :method => :delete, class:'pull-right'%>
+        </div>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

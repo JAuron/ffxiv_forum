@@ -5,7 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.4.1
 
 * System dependencies
 
@@ -22,6 +22,17 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+TO DO LIST
+Forum Layout
+Post Markdown
+Handling Nil Exceptions
+Restricting User Access based on Role
+
+Front Page
+Forms for New post/section/topic - Work with markdown
+
 
 STRUCTURE
 
