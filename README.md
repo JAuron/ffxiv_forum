@@ -33,6 +33,15 @@ Restricting User Access based on Role
 Front Page
 Forms for New post/section/topic - Work with markdown
 
+USER PAGE - 
+	Classes + Levels
+	Title
+	Roles
+	Last Post
+	Picture
+	Joined Date
+	Number of posts
+
 
 STRUCTURE
 

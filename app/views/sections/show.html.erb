@@ -3,12 +3,12 @@
 <body>
   <div class="container">
   <br />
-    <% if @section.children.present? || current_user.has_role?('admin') %>
+    <% if @section.children.present? || current_user&.has_role?('admin') %>
       <div class=" panel panel-default">
         <div class="panel-heading">
           <div class="row">
             <h4 class="col-md-4 text-left">Sections</h4>
-            <% if current_user.has_role?("admin")%>
+            <% if current_user&.has_role?("admin")%>
               <div class="col-md-8 text-right">
                 <a class="btn btn-info" href=<%= new_section_path(section: @section.id) %> role="button">New Section</a>
               </div>
@@ -20,7 +20,7 @@
             <tr>
               <th width="70%">Name</th>
               <th width="30%">Last Post</th>
-              <% if current_user.has_role?("admin") %>
+              <% if current_user&.has_role?("admin") %>
                 <th colspan="2"></th>
               <% end %>
             </tr>
@@ -39,7 +39,7 @@
                     By: <%= link_to last_post.user.lodestone.name, last_post.user %> <BR>
                   <% end %>
                 </td>
-                <% if current_user.has_role?("admin") %>
+                <% if current_user&.has_role?("admin") %>
                   <td><%= link_to "Edit", edit_section_path(section) %></td>
                  <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
                 <% end %>
@@ -54,7 +54,7 @@
       <div class="panel-heading">
         <div class="row">
           <h4 class="col-md-4 text-left">Topics</h4>
-          <% if current_user.has_role?("admin")%>
+          <% if current_user&.has_role?("admin")%>
             <div class="col-md-8 text-right">
               <a class="btn btn-info" href=<%= new_topic_path(section: @section.id) %> role="button">New Topic</a>
             </div>
@@ -67,7 +67,7 @@
           <th width="60%">Title</th>
           <th width="10%">Replies</th>
           <th width="30%">Last Post</th>
-          <% if current_user.has_role?("admin") %>
+          <% if current_user&.has_role?("admin") %>
             <th colspan="2"></th>
           <% end %>
         </tr>
@@ -83,7 +83,7 @@
               By: <%= link_to topic.posts.last.user.lodestone.name, topic.posts.last.user %>
               <% end %>
             </td>
-            <% if current_user.has_role?("admin") %>
+            <% if current_user&.has_role?("admin") %>
               <td><%= link_to "Edit", edit_topic_path(topic) %></td>
               <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
             <% end %>

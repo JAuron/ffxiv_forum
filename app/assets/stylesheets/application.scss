@@ -23,7 +23,8 @@ $navbar-default-link-active-color: #323232;
 $navbar-default-link-hover-color: #FFFFFF;
 $panel-bg: #323232;
 $table-bg-hover: #000000;
-$panel-default-heading-bg: #E34C35;
+
+$panel-footer-bg: #E34C35;
 $text-color: #D7D7CD;
 $headings-color: #FFFFFF;
 $link-color: #E34C35;
@@ -35,3 +36,30 @@ $btn-info-bg: #323232;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.well {
+  background-color: #404040;
+  border: 0px solid #e3e3e3;
+}
+
+.panel {
+	border: 0px solid #ddd;
+}
+
+.panel-heading {
+  background-color: #E34C35;
+	border-bottom: 20px solid #404040;
+	h1 { 
+		color: #404040; 
+		font-weight: 300; 
+	}
+}
+
+.panel-footer {
+	border-top: 0px solid #ddd;
+	border-bottom: 20px solid #404040;
+	a:link { color: #404040; }
+	a:visited { color: #404040; }
+	a:hover { color: #FFFFFF; }
+	a:active { color: #323232; }
+}

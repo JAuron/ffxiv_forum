@@ -1,5 +1,5 @@
 <head><h1><%= @lodestone_data.name %></h1></head>
-<BR />
+<br/>
 <body>
   <div class="container">
     <div class="row">
@@ -7,51 +7,79 @@
         <div class="panel-body">
           <%= image_tag @lodestone_data.portrait, class: 'col-md-4' %>
           <div class="panel col-md-8">
+            <% if @user.roles %>
+              <% @user.roles.uniq.each do |role|%>
+                <span class="badge badge-danger"> <%= role.name.humanize %></span>
+              <% end %> 
+            <% end %>
+            <br/>
+            <br/>
             Title: <%= @lodestone_data.title %> <br/>
             <div class=" panel panel-default ">
               <div class="panel-body">
                 <div class="row">
-                  <% JSON.parse(@lodestone_data.class_data)['Tank'].each do |tank| %>
-                   <div class="col-sm-1 padding-0"> <%= image_tag tank["icon"], size: 25 %>
-                    <center><%= tank["level"] %></center></div>
-                  <% end %>
+                  <div class="col-lg-6">
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Tank'].each do |tank| %>
+                       <div class="col-xs-2"><center><%= image_tag tank["icon"], size: 25 %>
+                        <%= tank["level"] %></center></div>
+                      <% end %>
+                    </div>
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Healer'].each do |healer| %>
+                        <div class="col-xs-2"><center><%= image_tag healer["icon"], size: 25 %>
+                        <%= healer["level"] %></center></div>
+                      <% end %>
+                    </div>
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
+                        <div class="col-xs-2"><center><%= image_tag ranged["icon"], size: 25 %>
+                        <%= ranged["level"] %></center></div>
+                      <% end %>
+                    </div>
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Caster'].each do |caster| %>
+                        <div class="col-xs-2"><center><%= image_tag caster["icon"], size: 25 %>
+                        <%= caster["level"] %></center></div>
+                      <% end %>
+                    </div>
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Melee'].each do |melee| %>
+                        <div class="col-xs-2"><center><%= image_tag melee["icon"], size: 25 %>
+                        <%= melee["level"] %></center></div>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <% JSON.parse(@lodestone_data.class_data)['Crafter'].each_slice(4) do |slice| %>
+                      <div class="row">
+                        <% slice.each do |crafter| %>
+                          <div class="col-xs-2"><center><%= image_tag crafter["icon"], size: 25 %>
+                          <%= crafter["level"] %></center></div>
+                        <% end %>
+                      </div>
+                    <% end %>
+                    <div class="row">
+                      <% JSON.parse(@lodestone_data.class_data)['Gatherer'].each do |gatherer| %>
+                        <div class="col-xs-2"><center><%= image_tag gatherer["icon"], size: 25 %>
+                        <%= gatherer["level"] %></center></div>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
-                  <% JSON.parse(@lodestone_data.class_data)['Healer'].each do |healer| %>
-                    <div class="col-sm-1"><center><%= image_tag healer["icon"], size: 25 %>
-                    <%= healer["level"] %></center></div>
-                  <% end %>
-                </div>
-                <div class="row">
-                  <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
-                    <div class="col-sm-1"><%= image_tag ranged["icon"], size: 25 %>
-                    <center><%= ranged["level"] %></center></div>
-                  <% end %>
-                </div>
-                  <br/>
-                  <br/>
-                  <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
-                    <%= image_tag ranged["icon"], size: 25 %>
-                    <%= ranged["level"] %>
-                  <% end %>
-                  <% JSON.parse(@lodestone_data.class_data)['Caster'].each do |caster| %>
-                    <%= image_tag caster["icon"], size: 25 %>
-                    <%= caster["level"] %>
-                  <% end %>
-                  <br/>
-                  <br/>
-                  <% JSON.parse(@lodestone_data.class_data)['Melee'].each do |melee| %>
-                    <%= image_tag melee["icon"], size: 25 %>
-                    <%= melee["level"] %>
-                  <% end %>
-                  <br/>
-                  <br/>
-                </div>
-              </div>
-            <% if user_last_post(@user) %>
-              Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
-              <%= time_formatter(user_last_post(@user).created_at) %>
-            <% end %>
+              </div> 
+            </div>
+          
+            <div class="panel clearfix">
+              Joined on: <%= time_formatter(@user.created_at) %> <br/>
+              <%= Post.where(user_id: @user.id).count %> Posts <br/>
+              <% if user_last_post(@user) %>
+                Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
+                <%= time_formatter(user_last_post(@user).created_at) %>
+              <% else %>
+                <i> This user has not posted yet. </i>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>

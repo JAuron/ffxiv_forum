@@ -1,30 +1,48 @@
-<h4><%= backchain(@topic.section_id) %></h4>
-  <div class="container">
 
- <div class=" panel panel-default">
-      <div class="panel-heading" align="center">
-        <h1><%= @topic.title %></h1>
-      </div>
-<table class="table table-hover">
+<div class="container">
+  <h4><%= backchain(@topic.section_id) %></h4>
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div class="panel">
+        <div class="panel-heading" align="center">
+          <section class="panel-title">
+            <h1><%= @topic.title %></h1>                      
+          </section>
+        </div>
+        <% for post in @posts %>
+          <section class="row panel-body">                  
+            <section id="user-description" class="col-md-2" align="center">
+              <section class="well">
+                <%= post_user_name(post) %>
+                <BR/>
+                <figure>
+                   <%= image_tag post.user.lodestone.avatar if post.user %>
+                </figure>
+                <br/>
+                <% if post.user&.roles %>
+                  <% post.user.roles.uniq.each do |role|%>
+                    <span class="badge badge-danger"> <%= role.name.humanize %></span>
+                  <% end %> 
+                <% end %>
+              </section>
+            </section>
+            <section class="col-md-9">
+              <%= post.text %>
+            </section>                  
+          </section>
 
-  <% for post in @posts %>
-    <tr>
-      <td width="20%"><%= post_user_name(post) %> <BR/><BR/> <%= image_tag post.user.lodestone.avatar if post.user %></td>
-      <td width="80%">
-        <div>
-          <%= post.text %>
-        </div>
-        <% if current_user.has_role?("admin") || current_user == post.user %>
-        <div>
-          <%= link_to "Edit", edit_post_path(post), class:'pull-right' %>
-          <BR/>
-          <%= link_to "Delete", post, :confirm => 'Are you sure?', :method => :delete, class:'pull-right'%>
-        </div>
+          <div class="panel-footer">
+            <% if current_user&.has_role?("admin") || current_user == post.user%>
+              <section align="right">
+                <%= link_to "Edit", edit_post_path(post), class: "btn btn-info btn-xs" %> |
+                <%= link_to "Delete", post, confirm: 'Are you sure?', :method => :delete, class: "btn btn-info btn-xs"%>
+              </section>
+            <% end %>
+          </div>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-</div>
-<p><%= link_to "New Post", "/posts/new?topic=#{@topic.id}" %></p>
+      </div>
+    </div>
+  </div>
+
+  <p><%= link_to "New Post", "/posts/new?topic=#{@topic.id}" %></p>
 </div>
