@@ -14,6 +14,7 @@
  *= require select2-bootstrap
  *= require_tree .
  *= require_self
+ *= require trix
  */
 
 $body-bg: #404040;
@@ -29,6 +30,7 @@ $text-color: #D7D7CD;
 $headings-color: #FFFFFF;
 $link-color: #E34C35;
 $btn-info-bg: #323232;
+$btn-danger-bg: #E34C35;
 #padding-0 {
     padding-right:0;
     padding-left:0;
@@ -41,12 +43,16 @@ $btn-info-bg: #323232;
   background-color: #404040;
   border: 0px solid #e3e3e3;
 }
+.well.topic {
+  background-color: #E34C35;
+  border: 0px solid #e3e3e3;
+}
 
 .panel {
 	border: 0px solid #ddd;
 }
 
-.panel-heading {
+.panel-heading.topic {
   background-color: #E34C35;
 	border-bottom: 20px solid #404040;
 	h1 { 
@@ -58,8 +64,19 @@ $btn-info-bg: #323232;
 .panel-footer {
 	border-top: 0px solid #ddd;
 	border-bottom: 20px solid #404040;
-	a:link { color: #404040; }
-	a:visited { color: #404040; }
+	a:link { color: #D7D7CD; }
+	a:visited { color: #D7D7CD; }
 	a:hover { color: #FFFFFF; }
 	a:active { color: #323232; }
+	btn-info-bg: #000000;
+}
+
+trix-toolbar .trix-button-group {
+  background: white;
+}
+
+.trix-content {
+  background: white;
+  color: black;
+  height: 150px;
 }

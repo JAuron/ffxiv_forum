@@ -29,7 +29,7 @@ class PostsController < ApplicationController
       flash[:notice] = "Successfully created post."
       redirect_to "/topics/#{@post.topic_id}"
     else
-      redirect_to :action => 'new', topic: params[:post][:topic_id]
+      redirect_back(fallback_location: '/')
     end
 	end
 

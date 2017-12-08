@@ -3,8 +3,8 @@
   <h4><%= backchain(@topic.section_id) %></h4>
   <div class="row clearfix">
     <div class="col-md-12 column">
-      <div class="panel">
-        <div class="panel-heading" align="center">
+      <div class="panel topic">
+        <div class="panel-heading topic" align="center">
           <section class="panel-title">
             <h1><%= @topic.title %></h1>                      
           </section>
@@ -27,15 +27,15 @@
               </section>
             </section>
             <section class="col-md-9">
-              <%= post.text %>
+              <%= post.text.html_safe %>
             </section>                  
           </section>
 
           <div class="panel-footer">
             <% if current_user&.has_role?("admin") || current_user == post.user%>
               <section align="right">
-                <%= link_to "Edit", edit_post_path(post), class: "btn btn-info btn-xs" %> |
-                <%= link_to "Delete", post, confirm: 'Are you sure?', :method => :delete, class: "btn btn-info btn-xs"%>
+                <%= link_to "Edit", edit_post_path(post), class: "btn btn-info btn-xs" %> 
+                <%= link_to "Delete", post, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-info btn-xs"%>
               </section>
             <% end %>
           </div>
@@ -43,6 +43,19 @@
       </div>
     </div>
   </div>
-
-  <p><%= link_to "New Post", "/posts/new?topic=#{@topic.id}" %></p>
+  <div class="panel topic">
+    <div class="panel-heading" align="center">
+        <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#reply">Reply</button>
+    </div>
+    <div id="reply" class="panel-body topic collapse">
+      <section class="well topic">
+        <%= form_for Post.new, html: {class: "nifty_form"} do |f| %>
+        <input type="hidden" id="topic_id" name="post[topic_id]" value="<%= @topic.id %>" />
+        <input type="hidden" id="topic_user_id" name="post[user_id]" value="<%= current_user.id %>" />
+        <%= f.trix_editor(:text, placeholder: 'Post here...') %>
+        <%= f.submit "Submit", class: "btn btn-info pull-right" %>
+      <% end %>
+      </section>
+    </div>
+  </div>
 </div>
