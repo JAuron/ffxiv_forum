@@ -3,16 +3,20 @@
   <h4><%= backchain(@topic.section_id) %></h4>
   <div class="row clearfix">
     <div class="col-md-12 column">
-      <div class="panel topic">
+      <div class="panel post">
         <div class="panel-heading topic" align="center">
           <section class="panel-title">
-            <h1><%= @topic.title %></h1>                      
+            <h1><%= @topic.title %></h1>
           </section>
         </div>
         <% for post in @posts %>
-          <section class="row panel-body">                  
-            <section id="user-description" class="col-md-2" align="center">
-              <section class="well">
+          <section class="row panel-body">
+            <% if current_user == post.user %>
+              <section id="user-description" class="col-md-2 pull-right" align="center">
+            <% else %>
+              <section id="user-description" class="col-md-2" align="center">
+            <% end %>
+              <section class="well avatar">
                 <%= post_user_name(post) %>
                 <BR/>
                 <figure>
@@ -28,10 +32,10 @@
             </section>
             <section class="col-md-9">
               <%= post.text.html_safe %>
-            </section>                  
+            </section>
           </section>
 
-          <div class="panel-footer">
+          <div class="panel-footer post">
             <% if current_user&.has_role?("admin") || current_user == post.user%>
               <section align="right">
                 <%= link_to "Edit", edit_post_path(post), class: "btn btn-info btn-xs" %> 
@@ -48,7 +52,7 @@
         <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#reply">Reply</button>
     </div>
     <div id="reply" class="panel-body topic collapse">
-      <section class="well topic">
+      <section class="well reply">
         <%= form_for Post.new, html: {class: "nifty_form"} do |f| %>
         <input type="hidden" id="topic_id" name="post[topic_id]" value="<%= @topic.id %>" />
         <input type="hidden" id="topic_user_id" name="post[user_id]" value="<%= current_user.id %>" />
@@ -58,4 +62,8 @@
       </section>
     </div>
   </div>
+
+<%= will_paginate @posts, class: 'nrw_pagination' %>
+
 </div>
+

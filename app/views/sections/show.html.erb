@@ -2,27 +2,23 @@
   <h1><%= @section.title %></h1></head>
 <body>
   <div class="container">
-  <br />
-    <% if @section.children.present? || current_user&.has_role?('admin') %>
-      <div class=" panel panel-default">
-        <div class="panel-heading">
+  <br/>
+    <% unless @sections.empty? %>
+      <div class=" panel">
+        <div class="panel-heading section">
           <div class="row">
-            <h4 class="col-md-4 text-left">Sections</h4>
-            <% if current_user&.has_role?("admin")%>
-              <div class="col-md-8 text-right">
-                <a class="btn btn-info" href=<%= new_section_path(section: @section.id) %> role="button">New Section</a>
-              </div>
-            <% end %>
+            <h4 class="h4 section">Sections
+              <% if current_user&.has_role?("admin")%>
+                <a class="btn btn-info pull-right" href=<%= new_section_path(section: 0) %> role="button">New Section</a>
+              <% end %>
+            </h4>
           </div>
         </div>
-        <table class="table table-bordered table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th width="70%">Name</th>
-              <th width="30%">Last Post</th>
-              <% if current_user&.has_role?("admin") %>
-                <th colspan="2"></th>
-              <% end %>
+              <th width="70%" class="section">Name</th>
+              <th width="30%" class="section">Last Post</th>
             </tr>
           </thead>
           <tbody>
@@ -30,8 +26,10 @@
               <% section_topics = section_topics(section.id) %>
               <% last_post = last_post(section_topics) %>
               <tr>
-                <td><h4><%= link_to h(section.title), section_path(section.id) %></h4>
-                  <small><%= section_topics.count %> topics</small><br /></td>
+                <td>
+                  <h4><%= link_to h(section.title), section_path(section.id) %></h4>
+                  <small><%= section_topics.count %> topics</small><br />
+                </td>
                 <td>
                   <% if last_post %>
                     <i><%= time_formatter(last_post.created_at)%></i> <BR> 
@@ -40,55 +38,50 @@
                   <% end %>
                 </td>
                 <% if current_user&.has_role?("admin") %>
-                  <td><%= link_to "Edit", edit_section_path(section) %></td>
-                 <td><%= link_to "Destroy", section, :confirm => 'Are you sure?', :method => :delete %></td>
+                  <td><%= link_to "Edit", edit_section_path(section), class: "btn btn-danger btn-xs" %></td>
+                  <td><%= link_to "Destroy", section, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger btn-xs" %></td>
                 <% end %>
               </tr>
             <% end %>
-            </tbody>
+          </tbody>
         </table>
       </div>
     <% end %>
-
-    <div class=" panel panel-default">
-      <div class="panel-heading">
+    <div class=" panel">
+      <div class="panel-heading section">
         <div class="row">
-          <h4 class="col-md-4 text-left">Topics</h4>
-          <% if current_user&.has_role?("admin")%>
-            <div class="col-md-8 text-right">
-              <a class="btn btn-info" href=<%= new_topic_path(section: @section.id) %> role="button">New Topic</a>
-            </div>
-          <% end %>
+          <h4 class="h4 section">Topics
+            <% if current_user&.has_role?("admin")%>
+              <a class="btn btn-info pull-right" href=<%= new_topic_path(section: 0) %> role="button">New Topic</a>
+            <% end %>
+          </h4>
         </div>
       </div>
-      <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th width="60%">Title</th>
-          <th width="10%">Replies</th>
-          <th width="30%">Last Post</th>
-          <% if current_user&.has_role?("admin") %>
-            <th colspan="2"></th>
-          <% end %>
-        </tr>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th width="60%" class="section">Title</th>
+            <th width="10%" class="section">Replies</th>
+            <th width="30%" class="section">Last Post</th>
+          </tr>
         </thead>
         <tbody>
-        <% for topic in @topics %>
-          <tr>
-            <td><%= link_to h(topic.title), topic_path(topic.id) %></td>
-            <td><%= topic.posts.count %></td>
-            <td>
-              <%if topic.posts.last %>
-              <i><%= time_formatter(topic.posts.last.created_at)%></i> <BR> 
-              By: <%= link_to topic.posts.last.user.lodestone.name, topic.posts.last.user %>
+          <% for topic in @topics %>
+            <tr>
+              <td><h4><%= link_to h(topic.title), topic_path(topic.id) %></h4></td>
+              <td><%= topic.posts.count %></td>
+              <td>
+                <%if topic.posts.last %>
+                  <i><%= time_formatter(topic.posts.last.created_at)%></i> <BR> 
+                  By: <%= topic.posts.last.user ? link_to(topic.posts.last.user.lodestone.name, topic.posts.last.user) : "<i>DELETED USER</i>".html_safe %>
+                <% end %>
+              </td>
+              <% if current_user&.has_role?("admin") %>
+                <td><%= link_to "Edit", edit_topic_path(topic), class: "btn btn-danger btn-xs" %></td>
+                <td><%= link_to "Destroy", topic, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger btn-xs" %></td>
               <% end %>
-            </td>
-            <% if current_user&.has_role?("admin") %>
-              <td><%= link_to "Edit", edit_topic_path(topic) %></td>
-              <td><%= link_to "Destroy", topic, :confirm => 'Are you sure?', :method => :delete %></td>
-            <% end %>
-          </tr>
-        <% end %>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

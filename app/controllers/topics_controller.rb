@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
 
 	def show
 		@topic = Topic.find(params[:id])
-		@posts = Post.where(topic_id: params[:id]).order(created_at: :asc)
+		@posts = Post.where(topic_id: params[:id]).order(created_at: :asc).paginate(page: params[:page])
 	end
 
 	def edit
@@ -29,29 +29,30 @@ class TopicsController < ApplicationController
 
 	def new
 		@topic = Topic.new
-		@post = Post.new
+		@topic.posts.build
 	end
 
 	def create
 	  @topic = Topic.new(topic_params)
-	  if @topic.save
-		params[:post][:topic_id] = @topic.id
-		params[:post][:user_id] = @topic.user_id
- 		@post = Post.new(params.require(:post).permit(:text, :topic_id, :user_id))
-	    if @post.save
+	  if @topic.save!
+		# params[:post][:topic_id] = @topic.id
+		# params[:post][:user_id] = @topic.user_id
+ 	# 	@post = Post.new(params.require(:post).permit(:text, :topic_id, :user_id))
+	 #    if @post.save
 	      flash[:notice] = "Successfully created topic."
 	      redirect_to "/forum/#{@topic.section_id}"
-	    else
-	      redirect_to :action => 'new'
-	    end
+	    # else
+	    #   redirect_to :action => 'new'
+	    # end
 	  else
 	    render :action => 'new'
+	    puts flash[:error]
 	  end
 	end
 
 	private
 
 	def topic_params
-		params.require(:topic).permit(:title, :section_id, :user_id)
+		params.require(:topic).permit(:title, :section_id, :user_id, posts_attributes: [:text, :user_id])
 	end
 end

@@ -15,4 +15,6 @@ class Post < ApplicationRecord
 	belongs_to :topic
 
 	validates :text, presence: true
+
+	self.per_page = 10
 end

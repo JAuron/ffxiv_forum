@@ -15,6 +15,7 @@
  *= require_tree .
  *= require_self
  *= require trix
+ *= require pagination
  */
 
 $body-bg: #404040;
@@ -39,29 +40,22 @@ $btn-danger-bg: #E34C35;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.well {
-  background-color: #404040;
-  border: 0px solid #e3e3e3;
-}
-.well.topic {
-  background-color: #E34C35;
-  border: 0px solid #e3e3e3;
-}
-
-.panel {
-	border: 0px solid #ddd;
-}
+/*TOPIC VIEW PAGE*/
 
 .panel-heading.topic {
   background-color: #E34C35;
 	border-bottom: 20px solid #404040;
 	h1 { 
 		color: #404040; 
-		font-weight: 300; 
+		font-weight: bold; 
 	}
 }
 
-.panel-footer {
+.panel.post {
+	border: 0px solid #ddd;
+}
+
+.panel-footer.post {
 	border-top: 0px solid #ddd;
 	border-bottom: 20px solid #404040;
 	a:link { color: #D7D7CD; }
@@ -69,6 +63,22 @@ $btn-danger-bg: #E34C35;
 	a:hover { color: #FFFFFF; }
 	a:active { color: #323232; }
 	btn-info-bg: #000000;
+}
+
+.well.avatar {
+  background-color: #404040;
+  border: 0px solid #e3e3e3;
+}
+
+.well.reply {
+  background-color: #404040;
+  border: 0px solid #e3e3e3;
+  padding-bottom: 45px;
+}
+
+.well.form {
+  background-color: #323232;
+  border: 1px solid #e3e3e3;
 }
 
 trix-toolbar .trix-button-group {
@@ -79,4 +89,28 @@ trix-toolbar .trix-button-group {
   background: white;
   color: black;
   height: 150px;
+  margin-bottom: 10px;
+}
+
+
+/*INDEX VIEW PAGE*/
+
+.h4.section {
+  padding-left: 10px;
+	padding-right: 10px;
+	line-height: 30px;
+}
+
+.table > thead > tr > th.section {
+	border: transparent;
+}
+
+.panel-heading.section {
+  background-color: #E34C35;
+}
+
+/*LOGIN PAGE*/
+
+.select2-container .select2-selection--single {
+	height: 34px;
 }

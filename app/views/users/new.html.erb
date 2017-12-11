@@ -54,34 +54,31 @@
 </head>
 <h1>Signup!</h1>
 <div class="container">
+<section class="well form">
+
 <%= form_for :user, url: '/users' do |f| %>
 
-  <div class="form-group col-sm-12">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email">
+
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="password">Password Confirmation</label>
+      <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
+    </div>
   </div>
   <div class="form-group col-sm-6">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
-  </div>
-  <div class="form-group col-sm-6">
-    <label for="password">Password Confirmation</label>
-    <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
-  </div>
-  <div class="form-group col-sm-12">
-    <label for="email">Lodestone ID</label>
+    <label for="email">Character</label>
     <select class="user_lodestone_id" data-width="100%" id="user_lodestone_id" name="user[lodestone_id]"><option></option></select>
   </div>
 
- <!--  <p>
-  Roles:
-  <% Role.all.each do |role| %>
-  	<%= role.name %>
-  	<%= check_box("user", "roles", {multiple: true}, role.id, nil) %>
-  <% end %>
-  </p> -->
-  <%= f.submit "Submit" %>
+  <%= f.submit "Submit", class: "btn btn-danger btn-block" %>
 
 <% end %>
-
-</div>
+</section>

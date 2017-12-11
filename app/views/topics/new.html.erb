@@ -1,10 +1,18 @@
-<%= form_for :topic, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
-  <% if params[:section] %>
-  	<input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" />
-  <% end %>
-  <% if current_user %>
-  	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
-  <% end %>
-    <%= f.submit "Create" %>
-	<textarea name="post[text]" cols="80" rows="20">></textarea>
-<% end %>
+<div id="reply" class="panel-body topic">
+  <section class="well reply">
+    <%= form_for @topic, html: {class: "nifty_form"} do |f| %>
+	    <% if params[:section] %>
+		  	<input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" />
+		  <% end %>
+      <% if current_user %>
+		  	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
+		  <% end %>
+	    <%= f.text_field(:title) %>
+	    <%= f.fields_for :posts do |x| %>
+	    	<%= x.hidden_field :user_id, value: current_user.id %>
+	    	<%= x.trix_editor :text %>
+	    <% end %>
+	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
+	  <% end %>
+  </section>
+</div>

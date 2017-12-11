@@ -1,11 +1,8 @@
-<%= form_for @post do |f| %>
-</br>
-  <% if params[:topic] %>
-  	<input type="hidden" id="post_topic_id" name="post[topic_id]" value="<%= params[:topic] %>" />
-  <% end %>
-  <% if current_user %>
-  	<input type="hidden" id="post_user_id" name="post[user_id]" value="<%= current_user.id %>" />
-  <% end %>
-    <%= f.text_area :text %>
-    <%= f.submit "Create" %>
-<% end %>
+<div id="reply" class="panel-body topic">
+  <section class="well reply">
+    <%= form_for @post, html: {class: "nifty_form"} do |f| %>
+	    <%= f.trix_editor(:text, placeholder: 'Post here...') %>
+	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
+	  <% end %>
+  </section>
+</div>
