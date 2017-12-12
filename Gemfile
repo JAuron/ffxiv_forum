@@ -39,8 +39,9 @@ gem 'bootstrap-sass'
 gem "jquery-rails"
 gem "select2-rails"
 
-# Rich Text editor
+# Rich Text and inline editor
 gem 'trix'
+gem 'best_in_place'
 
 # Pagination
 gem 'will_paginate'

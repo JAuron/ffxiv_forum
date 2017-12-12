@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require bootstrap
+//= require best_in_place
 //= require select2
 //= require rails-ujs
 //= require turbolinks

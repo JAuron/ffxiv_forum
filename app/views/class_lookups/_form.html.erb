@@ -1,0 +1,10 @@
+<div id="reply" class="panel-body topic">
+  <section class="well reply">
+    <%= form_for @lookup, html: {class: "nifty_form"} do |f| %>
+	    <%= f.text_field :name %>
+	    <%= f.select(:classification, Lodestone::CLASSIFICATIONS, :prompt => 'Select') %>
+	    <%= f.text_field :icon_url %>
+	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
+	  <% end %>
+  </section>
+</div>

@@ -11,8 +11,8 @@ class UsersController < ApplicationController
     	redirect_to '/'
     end
 	  @user = User.new(user_params)
-	  # create_lodestone(@user.lodestone_url)
-	  if @user.save
+	  create_lodestone(@user.lodestone_id)
+	  if @user.save!
 	  	# assign_roles(params[:user][:roles], @user.id)
 	    session[:user_id] = @user.id
 	    redirect_to '/'
@@ -40,8 +40,9 @@ class UsersController < ApplicationController
     render :partial=>"users/possible_characters", :layout => false, :data => data["data"]["results"]
   end
 
-	def create_lodestone(lodestone_url)
-  	resp = Net::HTTP.get_response(URI.parse(lodestone_url))
+	def create_lodestone(lodestone_id)
+    url = "https://api.xivdb.com/character/#{lodestone_id}"
+  	resp = Net::HTTP.get_response(URI.parse(url))
   	return false if resp.code == "404"
   	data = JSON.parse(resp.body)
   	Lodestone.new(

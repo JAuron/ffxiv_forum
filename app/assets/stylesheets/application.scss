@@ -92,6 +92,16 @@ trix-toolbar .trix-button-group {
   margin-bottom: 10px;
 }
 
+.topic-name{
+  width: 100%;
+  border-radius: 2px;
+  border: 0px;
+  font-size: xx-large;
+  padding-left: 10px;
+  color: black;
+  margin-bottom: 20px;
+}
+
 
 /*INDEX VIEW PAGE*/
 
@@ -113,4 +123,18 @@ trix-toolbar .trix-button-group {
 
 .select2-container .select2-selection--single {
 	height: 34px;
+}
+
+
+
+
+
+
+
+
+/*CLASS LOOKUP PAGE*/
+
+.inline {
+  width: 75%;
+  color: black;
 }

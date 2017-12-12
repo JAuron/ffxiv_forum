@@ -53,7 +53,6 @@ private
 
 	def build_each_class_data(classdata, scholar=false)
 			unless scholar
-				puts classdata["name"]
 				data = {
 					name: classdata["name"],
 					icon:  "https://secure.xivdb.com/img/classes/set2/#{classdata["name"].delete(' ').downcase}.png",

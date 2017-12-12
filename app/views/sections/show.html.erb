@@ -1,15 +1,17 @@
-<head><h4><%= backchain(@section.parent_section_id) %></h4>
-  <h1><%= @section.title %></h1></head>
-<body>
-  <div class="container">
-  <br/>
+<div class="container">
+  <head>
+    <h4><%= backchain(@section.parent_section_id) %></h4>
+    <h1><%= @section.title %></h1>
+  </head>
+  <body>
+    <br/>
     <% unless @sections.empty? %>
       <div class=" panel">
         <div class="panel-heading section">
           <div class="row">
             <h4 class="h4 section">Sections
               <% if current_user&.has_role?("admin")%>
-                <a class="btn btn-info pull-right" href=<%= new_section_path(section: 0) %> role="button">New Section</a>
+                <a class="btn btn-info pull-right" href=<%= new_section_path(section: params[:id]) %> role="button">New Section</a>
               <% end %>
             </h4>
           </div>
@@ -52,7 +54,7 @@
         <div class="row">
           <h4 class="h4 section">Topics
             <% if current_user&.has_role?("admin")%>
-              <a class="btn btn-info pull-right" href=<%= new_topic_path(section: 0) %> role="button">New Topic</a>
+              <a class="btn btn-info pull-right" href=<%= new_topic_path(section: params[:id]) %> role="button">New Topic</a>
             <% end %>
           </h4>
         </div>
@@ -85,5 +87,5 @@
         </tbody>
       </table>
     </div>
-  </div>
-</body>
+  </body>
+</div>

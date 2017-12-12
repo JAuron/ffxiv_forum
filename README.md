@@ -25,13 +25,13 @@ Things you may want to cover:
 
 
 TO DO LIST
+
+Adding in Admin tools dropdown for class_lookup + Other tools
 Forum Layout
-Post Markdown
 Handling Nil Exceptions
 Restricting User Access based on Role
-
 Front Page
-Forms for New post/section/topic - Work with markdown
+Forms for New post/section/topic
 
 USER PAGE - 
 	Classes + Levels

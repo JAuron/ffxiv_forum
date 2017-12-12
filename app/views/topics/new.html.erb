@@ -3,14 +3,16 @@
     <%= form_for @topic, html: {class: "nifty_form"} do |f| %>
 	    <% if params[:section] %>
 		  	<input type="hidden" id="topic_section_id" name="topic[section_id]" value="<%= params[:section] %>" />
-		  <% end %>
+			<% end %>
       <% if current_user %>
 		  	<input type="hidden" id="topic_user_id" name="topic[user_id]" value="<%= current_user.id %>" />
-		  <% end %>
-	    <%= f.text_field(:title) %>
+			<% end %>
+	    <%= f.text_field :title, placeholder: "Topic Title", class: "topic-name" %>
 	    <%= f.fields_for :posts do |x| %>
 	    	<%= x.hidden_field :user_id, value: current_user.id %>
-	    	<%= x.trix_editor :text %>
+	    	<section class="well form">
+	    	<%= x.trix_editor :text, placeholder: "Input the topics first post" %>
+	    	</section>
 	    <% end %>
 	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
 	  <% end %>
