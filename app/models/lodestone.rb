@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  name         :string(255)
-#  title        :string(255)
+#  metadata     :text(65535)
 #  server       :string(255)
 #  free_company :string(255)
 #  portrait     :string(255)
@@ -47,6 +47,17 @@ class Lodestone < ApplicationRecord
 				end
 			end
 		end
+	end
+
+	def metadata=(data)
+		metadata = {}
+		metadata[:title] = data["title"]
+		metadata[:gender] = data["gender"]
+		metadata[:race] = data["race"]
+		metadata[:clan] = data["clan"]
+		metadata[:guardian] = {name: data["guardian"]["name"], icon: data["guardian"]["icon"]}
+		metadata[:grand_company] = {name: data["grand_company"]["name"], icon: data["grand_company"]["icon"], rank: data["grand_company"]["rank"]}
+		write_attribute(:metadata, metadata.to_json)
 	end
 
 private

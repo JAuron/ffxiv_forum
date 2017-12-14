@@ -1,12 +1,13 @@
-<head><h1><%= @lodestone_data.name %></h1></head>
-<br/>
-<body>
-  <div class="container">
+<div class="container">
+  <head><h1>View Profile</h1></head>
+  <br/>
+  <body>
     <div class="row">
-      <div class=" panel panel-default ">
-        <div class="panel-body">
-          <%= image_tag @lodestone_data.portrait, class: 'col-md-4' %>
+      <div class="panel panel-default ">
+        <div class="panel-body userdata">
+          <%= image_tag @lodestone_data.portrait, class: 'col-md-4 avatar' %>
           <div class="panel col-md-8">
+            <h4><%= @lodestone_data.name %> - <%= @metadata['title'] %></h4>
             <% if @user.roles %>
               <% @user.roles.uniq.each do |role|%>
                 <span class="badge badge-danger"> <%= role.name.humanize %></span>
@@ -14,63 +15,75 @@
             <% end %>
             <br/>
             <br/>
-            Title: <%= @lodestone_data.title %> <br/>
-            <div class=" panel panel-default ">
-              <div class="panel-body">
+            <div class="row">
+              <section class="col-sm-4 well classdata">
+                <dl>
+                  <dt>Gender:</dt> 
+                  <dd><%= @metadata['gender'].humanize %></dd>
+                  <dt>Race:</dt> 
+                  <dd><%= @metadata['race'] %></dd>
+                  <dt>Clan:</dt> 
+                  <dd><%= @metadata['clan'] %></dd>
+                  <br/>
+                  <br/>
+                  <dt>Grand Company Rank:</dt> 
+                  <dd><%= image_tag @metadata['grand_company']['icon'], size: 25 %> <%= @metadata['grand_company']['rank'] %></dd>
+                  <dt>Guardian:</dt> 
+                  <dd><%= image_tag @metadata['guardian']['icon'], size: 25 %> <%= @metadata['guardian']['name'] %></dd>
+                </dl>
+              </section>
+              <section class="col-sm-4 well classdata">
                 <div class="row">
-                  <div class="col-lg-6">
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Tank'].each do |tank| %>
-                       <div class="col-xs-2"><center><%= image_tag tank["icon"], size: 25 %>
-                        <%= tank["level"] %></center></div>
-                      <% end %>
-                    </div>
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Healer'].each do |healer| %>
-                        <div class="col-xs-2"><center><%= image_tag healer["icon"], size: 25 %>
-                        <%= healer["level"] %></center></div>
-                      <% end %>
-                    </div>
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Ranged'].each do |ranged| %>
-                        <div class="col-xs-2"><center><%= image_tag ranged["icon"], size: 25 %>
-                        <%= ranged["level"] %></center></div>
-                      <% end %>
-                    </div>
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Caster'].each do |caster| %>
-                        <div class="col-xs-2"><center><%= image_tag caster["icon"], size: 25 %>
-                        <%= caster["level"] %></center></div>
-                      <% end %>
-                    </div>
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Melee'].each do |melee| %>
-                        <div class="col-xs-2"><center><%= image_tag melee["icon"], size: 25 %>
-                        <%= melee["level"] %></center></div>
-                      <% end %>
-                    </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <% JSON.parse(@lodestone_data.class_data)['Crafter'].each_slice(4) do |slice| %>
-                      <div class="row">
-                        <% slice.each do |crafter| %>
-                          <div class="col-xs-2"><center><%= image_tag crafter["icon"], size: 25 %>
-                          <%= crafter["level"] %></center></div>
-                        <% end %>
-                      </div>
-                    <% end %>
-                    <div class="row">
-                      <% JSON.parse(@lodestone_data.class_data)['Gatherer'].each do |gatherer| %>
-                        <div class="col-xs-2"><center><%= image_tag gatherer["icon"], size: 25 %>
-                        <%= gatherer["level"] %></center></div>
-                      <% end %>
-                    </div>
-                  </div>
+                  <% @class_data['Tank'].each do |tank| %>
+                   <div class="col-xs-3"><center><%= image_tag tank["icon"], size: 25 %><br/>
+                    <%= tank["level"] %></center></div>
+                  <% end %>
                 </div>
-              </div> 
+                <div class="row">
+                  <% @class_data['Healer'].each do |healer| %>
+                    <div class="col-xs-3"><center><%= image_tag healer["icon"], size: 25 %><br/>
+                    <%= healer["level"] %></center></div>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <% @class_data['Ranged'].each do |ranged| %>
+                    <div class="col-xs-3"><center><%= image_tag ranged["icon"], size: 25 %><br/>
+                    <%= ranged["level"] %></center></div>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <% @class_data['Caster'].each do |caster| %>
+                    <div class="col-xs-3"><center><%= image_tag caster["icon"], size: 25 %><br/>
+                    <%= caster["level"] %></center></div>
+                  <% end %>
+                </div>
+                <div class="row">
+                  <% @class_data['Melee'].each do |melee| %>
+                    <div class="col-xs-3"><center><%= image_tag melee["icon"], size: 25 %><br/>
+                    <%= melee["level"] %></center></div>
+                  <% end %>
+                </div>
+              </section>
+              <section class="col-sm-4 well classdata">
+                <% @class_data['Crafter'].each_slice(4) do |slice| %>
+                  <div class="row">
+                    <% slice.each do |crafter| %>
+                      <div class="col-xs-3"><center><%= image_tag crafter["icon"], size: 25 %><br/>
+                      <%= crafter["level"] %></center></div>
+                    <% end %>
+                  </div>
+                <% end %>
+                <br/>
+                <br/>
+                <div class="row">
+                  <% @class_data['Gatherer'].each do |gatherer| %>
+                    <div class="col-xs-3"><center><%= image_tag gatherer["icon"], size: 25 %><br/>
+                    <%= gatherer["level"] %></center></div>
+                  <% end %>
+                </div>
+              </section>
             </div>
-          
-            <div class="panel clearfix">
+            <div class="row well postdata">
               Joined on: <%= time_formatter(@user.created_at) %> <br/>
               <%= Post.where(user_id: @user.id).count %> Posts <br/>
               <% if user_last_post(@user) %>
@@ -84,5 +97,5 @@
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
+</div>

@@ -36,7 +36,7 @@ Forms for New post/section/topic
 USER PAGE - 
 	Classes + Levels
 	Title
-	Roles
+	Forum Roles
 	Last Post
 	Picture
 	Joined Date

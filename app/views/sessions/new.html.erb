@@ -1,18 +1,17 @@
-<h1>Login</h1>
-
 <div class="container">
-	<%= form_tag '/login' do %>
-
-	<div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-  </div>
-
-  <button type="submit" name="commit" value="Submit" class="btn btn-primary">Sign in</button>
-
-	<% end %>
+  <h1>Login</h1>
+  <br/>
+  <section class="well form"> 
+    <%= form_tag '/login' do %>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      </div>
+      <button type="submit" name="commit" value="Submit" class="btn btn-primary">Sign in</button>
+    <% end %>
+  </section>
 </div>

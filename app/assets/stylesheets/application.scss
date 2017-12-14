@@ -126,10 +126,32 @@ trix-toolbar .trix-button-group {
 }
 
 
+/*USER PAGE*/
 
+.well.classdata {
+  background-color: #404040;
+  border: 1px solid #323232;
+  height: 300px;
+}
 
+.well.postdata {
+  border: 1px solid #323232;
+  background-color: #404040;
+  padding: 17px;
+}
 
+.avatar {
+  padding-left: 0px;
+}
 
+.panel-body.userdata {
+  padding-top: 30px;
+  padding-bottom: 0px;
+}
+
+dd {
+  margin-left: 40px;
+}
 
 
 /*CLASS LOOKUP PAGE*/

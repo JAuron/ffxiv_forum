@@ -24,6 +24,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @lodestone_data = @user.lodestone
+    @class_data = JSON.parse(@lodestone_data.class_data)
+    @metadata = JSON.parse(@lodestone_data.metadata)
   end
  
   private
@@ -48,12 +50,12 @@ class UsersController < ApplicationController
   	Lodestone.new(
   		id: data["lodestone_id"],
   		name: data["name"],
-  		title: data["data"]["title"],
   		server: data["server"],
   		free_company: nil,
   		portrait: data["portrait"],
   		avatar: data["avatar"],
-  		class_data: data["data"]["classjobs"]
+  		class_data: data["data"]["classjobs"],
+      metadata: data["data"]
   	).save!
   end
 

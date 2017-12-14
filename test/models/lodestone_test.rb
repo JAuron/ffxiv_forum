@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  name         :string(255)
-#  title        :string(255)
+#  metadata     :text(65535)
 #  server       :string(255)
 #  free_company :string(255)
 #  portrait     :string(255)
