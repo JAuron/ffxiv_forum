@@ -40,6 +40,11 @@ $btn-danger-bg: #E34C35;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.navbar-default .navbar-nav > li > a.no-pad {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
 /*TOPIC VIEW PAGE*/
 
 .panel-heading.topic {
@@ -140,8 +145,10 @@ trix-toolbar .trix-button-group {
   padding: 17px;
 }
 
-.avatar {
+img.avatar {
   padding-left: 0px;
+  display: table;
+  margin: 0 auto;
 }
 
 .panel-body.userdata {

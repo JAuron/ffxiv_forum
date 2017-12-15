@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+  end
+
   def new
   end
 
@@ -26,6 +30,12 @@ class UsersController < ApplicationController
     @lodestone_data = @user.lodestone
     @class_data = JSON.parse(@lodestone_data.class_data)
     @metadata = JSON.parse(@lodestone_data.metadata)
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to "/users"
   end
  
   private

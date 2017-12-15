@@ -5,8 +5,8 @@
     <div class="row">
       <div class="panel panel-default ">
         <div class="panel-body userdata">
-          <%= image_tag @lodestone_data.portrait, class: 'col-md-4 avatar' %>
-          <div class="panel col-md-8">
+          <%= image_tag @lodestone_data.portrait, class: 'col-lg-4 avatar', align: 'center' %>
+          <div class="panel col-lg-8">
             <h4><%= @lodestone_data.name %> - <%= @metadata['title'] %></h4>
             <% if @user.roles %>
               <% @user.roles.uniq.each do |role|%>
@@ -24,7 +24,6 @@
                   <dd><%= @metadata['race'] %></dd>
                   <dt>Clan:</dt> 
                   <dd><%= @metadata['clan'] %></dd>
-                  <br/>
                   <br/>
                   <dt>Grand Company Rank:</dt> 
                   <dd><%= image_tag @metadata['grand_company']['icon'], size: 25 %> <%= @metadata['grand_company']['rank'] %></dd>
@@ -84,14 +83,15 @@
               </section>
             </div>
             <div class="row well postdata">
-              Joined on: <%= time_formatter(@user.created_at) %> <br/>
-              <%= Post.where(user_id: @user.id).count %> Posts <br/>
+              Joined: <%= time_formatter(@user.created_at) %> <br/>
               <% if user_last_post(@user) %>
                 Last post: <%= link_to user_last_post(@user).topic.title, user_last_post(@user).topic %>
                 <%= time_formatter(user_last_post(@user).created_at) %>
               <% else %>
                 <i> This user has not posted yet. </i>
               <% end %>
+              <br/>
+              <%= Post.where(user_id: @user.id).count %> Posts <br/>
             </div>
           </div>
         </div>

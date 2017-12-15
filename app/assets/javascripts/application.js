@@ -11,10 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require trix
 //= require bootstrap
 //= require best_in_place
 //= require select2
-//= require rails-ujs
 //= require turbolinks
-//= require trix
 //= require_tree .

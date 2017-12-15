@@ -27,20 +27,10 @@ Things you may want to cover:
 TO DO LIST
 
 Adding in Admin tools dropdown for class_lookup + Other tools
-Forum Layout
-Handling Nil Exceptions
 Restricting User Access based on Role
 Front Page
-Forms for New post/section/topic
-
-USER PAGE - 
-	Classes + Levels
-	Title
-	Forum Roles
-	Last Post
-	Picture
-	Joined Date
-	Number of posts
+RESPONSIVE VIEW
+SOFT DELETION
 
 
 STRUCTURE

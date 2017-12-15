@@ -13,7 +13,7 @@
             <% if current_user == post.user %>
               <section id="user-description" class="col-md-2 pull-right" align="center">
             <% else %>
-              <section id="user-description" class="col-md-2" align="center">
+              <section id="user-description" class="col-md-2 pull-left" align="center">
             <% end %>
               <section class="well avatar">
                 <%= post_user_name(post) %>
@@ -23,9 +23,12 @@
                 </figure>
                 <br/>
                 <% if post.user&.roles %>
-                  <% post.user.roles.uniq.each do |role|%>
-                    <span class="badge badge-danger"> <%= role.name.humanize %></span>
-                  <% end %> 
+                  <% post.user.roles.uniq.each_slice(2) do |slice|%>
+                    <% slice.each do |role|%>
+                      <span class="badge badge-danger"> <%= role.name.humanize %></span>
+                    <% end %>
+                    <br/> 
+                  <% end %>
                 <% end %>
               </section>
             </section>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users
   resources :posts, except: [:show, :index]
   resources :class_lookups, except: [:show]
+  resources :roles, except: [:show]
 
 
   root 'homepage#index'

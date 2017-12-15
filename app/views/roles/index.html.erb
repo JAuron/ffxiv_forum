@@ -1,0 +1,21 @@
+<div class="container">
+<head><h1>User Roles</h1></head>
+  <body>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th width="80%" class="section">Name</th>
+          <th width="10%" class="section"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+              <td><%= role.name %></td>
+              <td><%= link_to "Destroy", role, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger btn-xs" %></td>              
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</div>
