@@ -1,0 +1,11 @@
+<div id="reply" class="panel-body topic">
+  <section class="well reply">
+    <%= form_for @article, html: {class: "nifty_form"} do |f| %>
+	    <%= f.trix_editor(:text, placeholder: 'Post here...') %>
+	    <% if current_user %>
+		  	<input type="hidden" id="article_user_id" name="article[user_id]" value="<%= current_user.id %>" />
+			<% end %>
+	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
+	  <% end %>
+  </section>
+</div>

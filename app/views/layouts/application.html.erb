@@ -42,7 +42,7 @@
           <% end %>
         </ul> 
         <ul class="nav navbar-nav">
-          <li class="<%= 'active' if params[:controller] == 'homepage' %>"><a href="/">Homepage</a></li>
+          <li class="<%= 'active' if (params[:controller] == 'articles' && params[:action] == 'index') %>"><a href="/">Homepage</a></li>
           <li class="<%= 'active' if params[:controller] == 'sections'|| params[:controller] == 'topics' %>"><a href="/forum">Forum</a></li>
         </ul>
         

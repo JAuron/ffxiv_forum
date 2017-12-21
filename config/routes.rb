@@ -10,10 +10,11 @@ Rails.application.routes.draw do
   resources :sections, :path => "forum"
   resources :topics
   resources :users
+  resources :articles
   resources :posts, except: [:show, :index]
   resources :class_lookups, except: [:show]
   resources :roles, except: [:show]
 
 
-  root 'homepage#index'
+  root 'articles#index'
 end

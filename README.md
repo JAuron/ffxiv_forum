@@ -26,10 +26,8 @@ Things you may want to cover:
 
 TO DO LIST
 
-Adding in Admin tools dropdown for class_lookup + Other tools
 Restricting User Access based on Role
 Front Page
-RESPONSIVE VIEW
 SOFT DELETION
 
 

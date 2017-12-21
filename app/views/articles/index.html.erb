@@ -1,0 +1,47 @@
+<div class="container">
+	<%= image_tag "NRW_new.jpg" %>
+	<br/>
+    <div class="row clearfix">
+    <div class="col-md-12 column">
+      <div class="panel article">
+        <% for article in @articles %>
+          <section class="row panel-body">
+              <section id="user-description" class="col-md-3 pull-left" align="center">
+              <section class="well avatar">
+                <h4><%= post_user_name(article) %></h4>
+                <figure>
+                   <%= image_tag article.user.lodestone.avatar if article.user %>
+                </figure>
+                <br/>
+                <% if article.user&.roles %>
+                  <% article.user.roles.uniq.each_slice(2) do |slice|%>
+                    <% slice.each do |role|%>
+                      <span class="badge badge-danger"> <%= role.name.humanize %></span>
+                    <% end %>
+                    <br/> 
+                  <% end %>
+                <% end %>
+              </section>
+            </section>
+            <section class="col-md-9">
+              <%= article.text.html_safe %>
+            </section>
+          </section>
+
+          <div class="panel-footer article">
+            <% if current_user&.has_role?("admin") || current_user == article.user%>
+              <section align="right">
+                <%= link_to "Edit", edit_article_path(article), class: "btn btn-info btn-xs" %> 
+                <%= link_to "Delete", article, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-info btn-xs"%>
+              </section>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<%= will_paginate @articles, class: 'nrw_pagination' %>
+
+</div>
+
