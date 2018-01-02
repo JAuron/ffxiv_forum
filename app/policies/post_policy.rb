@@ -1,4 +1,4 @@
-class PostPolicy
+class PostPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
@@ -6,16 +6,8 @@ class PostPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    scope.where(:id => record.id).exists?
-  end
-
   def create?
-    false
+    red_wing?
   end
 
   def new?
@@ -23,7 +15,7 @@ class PostPolicy
   end
 
   def update?
-    record.user == user or user.has_role?('admin')
+    record.user == user or admin?
   end
 
   def edit?

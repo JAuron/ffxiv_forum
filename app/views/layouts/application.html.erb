@@ -49,6 +49,11 @@
       </div>
     </div>
   </nav>
+  <% if flash[:alert] %>
+    <section class="well flash">
+      <%= flash[:alert] %>
+    </section>
+  <% end %>
   <%= yield %>
 
   </body>

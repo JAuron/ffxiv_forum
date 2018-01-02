@@ -16,6 +16,7 @@ class PostsController < ApplicationController
 
 	def destroy
 		@post = Post.find(params[:id])
+		authorize @post
     @post.destroy
     redirect_to "/topics/#{@post.topic_id}"
 	end
@@ -26,6 +27,7 @@ class PostsController < ApplicationController
 
 	def create
  		@post = Post.new(post_params)
+ 		authorize @post
     if @post.save
       flash[:notice] = "Successfully created post."
       redirect_to "/topics/#{@post.topic_id}"

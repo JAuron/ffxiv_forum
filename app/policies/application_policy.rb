@@ -6,8 +6,18 @@ class ApplicationPolicy
     @record = record
   end
 
+  def admin?
+    return false unless @user
+    @user.has_role?('admin')
+  end
+
+  def red_wing?
+    return false unless @user
+    @user.has_role?('red_wing')
+  end
+
   def index?
-    false
+    red_wing?
   end
 
   def show?
@@ -15,7 +25,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    admin?
   end
 
   def new?
@@ -23,7 +33,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user.has_role?('adasd')
+    admin?
   end
 
   def edit?
@@ -31,7 +41,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    admin?
   end
 
   def scope
