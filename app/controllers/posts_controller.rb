@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
 	def update
     @post = Post.find(params[:id])
+    authorize @post
     if @post.update(post_params)
       redirect_to "/topics/#{@post.topic_id}"
     else
