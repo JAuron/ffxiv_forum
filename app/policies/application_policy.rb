@@ -16,6 +16,11 @@ class ApplicationPolicy
     @user.has_role?('red_wing')
   end
 
+  def test?
+    return false unless @user
+    @user.has_role?('test')
+  end
+
   def index?
     red_wing?
   end

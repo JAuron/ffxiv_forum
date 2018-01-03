@@ -1,7 +1,10 @@
 class PostsController < ApplicationController
 
+	after_action :verify_authorized
+
 	def edit
 		@post = Post.find(params[:id])
+    authorize @post
 	end
 
 	def update
@@ -23,6 +26,7 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+    authorize @post
 	end
 
 	def create

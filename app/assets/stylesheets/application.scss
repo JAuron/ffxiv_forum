@@ -45,6 +45,13 @@ $btn-danger-bg: #E34C35;
   padding-bottom: 0px;
 }
 
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  color: #555555;
+}
+.select2-results__option {
+  color: #555555;
+}
+
 img.header {
   width: 600px;
   display: block;

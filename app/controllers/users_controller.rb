@@ -1,10 +1,28 @@
 class UsersController < ApplicationController
 
+  after_action :verify_authorized
+
   def index
+    authorize User
     @users = User.all
   end
 
   def new
+  end
+
+  def edit
+    @user = User.find(params[:id])
+    authorize @user
+  end
+
+  def update
+    @user = User.find(params[:id])
+    authorize @user
+    if @user.update(user_params)
+      redirect_to "/users"
+    else
+      render :action => :edit
+    end
   end
 
   # New method of identify lodestone, loads up an image and details that the user is linking the correct account
@@ -15,6 +33,7 @@ class UsersController < ApplicationController
     	redirect_to '/'
     end
 	  @user = User.new(user_params)
+    authorize @user
 	  create_lodestone(@user.lodestone_id)
 	  if @user.save!
 	  	# assign_roles(params[:user][:roles], @user.id)
@@ -27,6 +46,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    authorize @user
     @lodestone_data = @user.lodestone
     @class_data = JSON.parse(@lodestone_data.class_data)
     @metadata = JSON.parse(@lodestone_data.metadata)
@@ -34,6 +54,7 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    authorize @user
     @user.destroy
     redirect_to "/users"
   end
