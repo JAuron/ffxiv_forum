@@ -26,8 +26,9 @@ Things you may want to cover:
 
 TO DO LIST
 
-Restricting User Access based on Role
-Front Page
+Front Page Layout
+Add/Change User Roles
+Change Password
 SOFT DELETION
 
 

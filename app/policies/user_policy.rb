@@ -5,8 +5,16 @@ class UserPolicy < ApplicationPolicy
     admin?
   end
 
-  def create
+  def create?
   	true
+  end
+
+  def update_password?
+  	@user == @record
+  end
+
+  def update_roles?
+    admin?
   end
 
 end

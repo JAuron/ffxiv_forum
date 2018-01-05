@@ -11,10 +11,8 @@ forum_home = Section.create!(id: 0, title: 'Home')
 roles_list = [
 								"admin",
 								"red_wing",
-								"friend_wing",
-								"engineer",
-								"gardener",
-								"guest"
+								"friend_wing"
+								"unassigned"
 						 ]
 
 roles_list.each do |name|

@@ -9,7 +9,12 @@ Rails.application.routes.draw do
 
   resources :sections, :path => "forum"
   resources :topics
-  resources :users
+  resources :users do
+    collection do
+      patch 'update_password/:id' => :update_password
+      patch 'update_roles/:id' => :update_roles
+    end
+  end
   resources :articles
   resources :posts, except: [:show, :index]
   resources :class_lookups, except: [:show]

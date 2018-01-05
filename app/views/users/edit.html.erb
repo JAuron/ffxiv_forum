@@ -1,84 +1,33 @@
-<head>
-  <script>
-    $(document).ready(function() {
-      $(".user_lodestone_id").select2({
-        ajax: {
-          url: "https://xivsync.com/character/search",
-          dataType: 'json',
-          delay: 250,
-          data: function (params) {
-            return {
-              server: 'moogle', // search term
-              name: params.term
-            };
-          },
-          processResults: function (data, params) {
-            // parse the results into the format expected by Select2
-            // since we are using custom formatting functions we do not need to
-            // alter the remote JSON data, except to indicate that infinite
-            // scrolling can be used
-            params.page = params.page || 1;
-
-            return {
-              results: data.data.results,
-              pagination: {
-                more: (params.page * 30) < data.count
-              }
-            };
-          },
-          cache: true
-        },
-        placeholder: "Search for a character",
-        escapeMarkup: function (markup) { return markup; },
-        minimumInputLength: 5,
-        templateResult: formatCharacter,
-        templateSelection: formatCharacterSelection
-      });
-
-      function formatCharacter (character) {
-        if (character.loading){
-          return character.name || character.text;;
-        }
-
-        var markup = "<div class='select2-result-repository clearfix'>" +
-          "<div class='select2-result-repository__avatar'><img src='" + character.avatar + "' height='50' width='50'/> " + character.name + "</div>";
-
-        return markup;
-      }
-
-      function formatCharacterSelection (character) {
-        return character.name;
-      }
-    });
-  </script>
-</head>
 <h1>Signup!</h1>
-<div class="container">
-<section class="well form">
+<div class="container well form">
+  <%= image_tag @user.lodestone.portrait, class: 'col-lg-6', align: 'center' %>
+  <div class="col-lg-6">
+    <%= form_for @user, url: {action: "update_password"} do |f| %>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email" value=<%= @user.email %>>
+      </div>
+      <div class="form-group">
+        <label for="password">Current Password</label>
+        <input type="password" class="form-control" id="user_current_password" name="user[current_password]" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="password">New Password</label>
+        <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="password">New Password Confirmation</label>
+        <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
+      </div>
+      <%= f.submit "Update Password", class: "btn btn-danger btn-block" %>
+    <% end %>
 
-<%= form_for :user, url: '/users' do |f| %>
+    <% if current_user.has_role?('admin') %>
+      <%= form_for @user, url: {action: "update_roles"} do |f| %>
+        <%= role_form_list %>
+        <%= f.submit "Update Roles", class: "btn btn-danger btn-block" %>
+      <% end %>
+    <% end %>
 
-
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email" value=<%= @user.email %>>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="password">Password Confirmation</label>
-      <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
-    </div>
-  </div>
-  <div class="form-group col-sm-6">
-    <label for="email">Character</label>
-    <select class="user_lodestone_id" data-width="100%" id="user_lodestone_id" name="user[lodestone_id]"><option></option></select>
-  </div>
-
-  <%= f.submit "Submit", class: "btn btn-danger btn-block" %>
-
-<% end %>
-</section>
+  </div>    
+</div>

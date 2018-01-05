@@ -8,9 +8,16 @@
 #  text       :text(65535)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted_at :datetime
+#
+# Indexes
+#
+#  index_posts_on_deleted_at  (deleted_at)
 #
 
 class Post < ApplicationRecord
+	acts_as_paranoid
+	
 	belongs_to :user
 	belongs_to :topic
 

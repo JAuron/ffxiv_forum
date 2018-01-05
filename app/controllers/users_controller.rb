@@ -15,13 +15,32 @@ class UsersController < ApplicationController
     authorize @user
   end
 
-  def update
+  def update_roles
     @user = User.find(params[:id])
     authorize @user
-    if @user.update(user_params)
-      redirect_to "/users"
+    binding.pry
+    UserRoleAssignment.where(user_id: @user.id).destroy_all
+    params[:user][:roles].each do |role|
+      UserRoleAssignment.deleted.where(user_id: @user.id, role_id: Role.find(role).id).first.restore
+    end
+      flash[:alert] = "User Roles Updated"
+      redirect_to user_path(@user)
+  end
+
+  def update_password
+    @user = current_user
+    authorize @user
+    if @user.authenticate(params[:user][:current_password])
+      if @user.update(user_password_params)
+        flash[:alert] = "Password Updated"
+        redirect_to root_path
+      else
+        flash[:alert] = "Failed to save Data"
+        redirect_to user_path(@user)
+      end
     else
-      render :action => :edit
+      flash[:alert] = "Password Did not authenticate"
+      redirect_to "/users"
     end
   end
 
@@ -36,7 +55,6 @@ class UsersController < ApplicationController
     authorize @user
 	  create_lodestone(@user.lodestone_id)
 	  if @user.save!
-	  	# assign_roles(params[:user][:roles], @user.id)
 	    session[:user_id] = @user.id
 	    redirect_to '/'
 	  else
@@ -62,8 +80,16 @@ class UsersController < ApplicationController
   private
 
 	def user_params
-	  params.require(:user).permit(:lodestone_id, :email, :password, :password_confirmation, :roles)
+	  params.require(:user).permit(:lodestone_id, :email, :current_password, :password, :password_confirmation, :roles)
 	end
+
+  def user_password_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
+
+  def user_roles_params
+    params.require(:user).permit(:roles)
+  end
 
   def get_user_lodestone_data(name)
     url = "https://xivsync.com/character/search?server=Moogle&name=#{name}"
@@ -88,12 +114,6 @@ class UsersController < ApplicationController
   		class_data: data["data"]["classjobs"],
       metadata: data["data"]
   	).save!
-  end
-
-  def assign_roles(roles_array, user_id)
-  	roles_array.each do |role_id|
-  		UserRoleAssignment.new(user_id: user_id, role_id: role_id).save!
-  	end
   end
 
   def user_class_data(classdata)

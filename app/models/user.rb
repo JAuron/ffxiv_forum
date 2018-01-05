@@ -8,9 +8,16 @@
 #  lodestone_id    :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  deleted_at      :datetime
+#
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
 #
 
 class User < ApplicationRecord
+  acts_as_paranoid
+  
 	has_secure_password
 	has_many :topics
 	has_many :posts

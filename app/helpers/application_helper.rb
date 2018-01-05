@@ -82,4 +82,10 @@ module ApplicationHelper
 		end
 		return compressed_data
 	end 
+
+	def role_form_list
+		collection_check_boxes :roles, Role.all, :id, :humanized_name do |b|
+			b.label { b.check_box }
+		end
+	end
 end
