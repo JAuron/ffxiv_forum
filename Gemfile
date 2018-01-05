@@ -34,6 +34,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap-sass'
+gem 'bootstrap-toggle-rails'
 
 # Use to lookup character details for signup
 gem "jquery-rails"

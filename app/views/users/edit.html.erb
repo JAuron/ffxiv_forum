@@ -24,7 +24,13 @@
 
     <% if current_user.has_role?('admin') %>
       <%= form_for @user, url: {action: "update_roles"} do |f| %>
-        <%= role_form_list %>
+        <%= f.collection_check_boxes :user, :roles, Role.all, :id, :humanized_name do |b| %>
+        <span>
+          <%= b.check_box({'data-toggle':"toggle"}) %>
+          <%= b.label %>
+          <BR/>
+        </span>
+        <% end %>
         <%= f.submit "Update Roles", class: "btn btn-danger btn-block" %>
       <% end %>
     <% end %>
