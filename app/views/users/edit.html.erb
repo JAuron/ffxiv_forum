@@ -1,39 +1,49 @@
-<h1>Signup!</h1>
-<div class="container well form">
-  <%= image_tag @user.lodestone.portrait, class: 'col-lg-6', align: 'center' %>
-  <div class="col-lg-6">
-    <%= form_for @user, url: {action: "update_password"} do |f| %>
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email" value=<%= @user.email %>>
-      </div>
-      <div class="form-group">
-        <label for="password">Current Password</label>
-        <input type="password" class="form-control" id="user_current_password" name="user[current_password]" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="password">New Password</label>
-        <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="password">New Password Confirmation</label>
-        <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
-      </div>
-      <%= f.submit "Update Password", class: "btn btn-danger btn-block" %>
-    <% end %>
-
-    <% if current_user.has_role?('admin') %>
-      <%= form_for @user, url: {action: "update_roles"} do |f| %>
-        <%= f.collection_check_boxes :user, :roles, Role.all, :id, :humanized_name do |b| %>
-        <span>
-          <%= b.check_box({'data-toggle':"toggle"}) %>
-          <%= b.label %>
-          <BR/>
-        </span>
-        <% end %>
-        <%= f.submit "Update Roles", class: "btn btn-danger btn-block" %>
+<div class="container ">
+  <h1>Edit Details</h1>
+  <div class="container well form">
+    <div class="text-center">
+      <%= image_tag @user.lodestone.portrait, class: 'col-lg-6', align: 'center' %>
+    </div>
+    <div class="col-lg-6">
+      <% if @user == current_user %>
+        <div class="well">
+          <%= form_for @user, url: {action: "update_password"},  html: {id: "edit_user_password"} do |f| %>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" name="user[email]" id="user_email" placeholder="Enter email" value=<%= @user.email %>>
+            </div>
+            <div class="form-group">
+              <label for="password">Current Password</label>
+              <input type="password" class="form-control" id="user_current_password" name="user[current_password]" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="password">New Password</label>
+              <input type="password" class="form-control" id="user_password" name="user[password]" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="password">New Password Confirmation</label>
+              <input type="password" class="form-control" id="user_password_confirmation" name="user[password_confirmation]" placeholder="Password">
+            </div>
+            <%= f.submit "Update Password", class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div>
       <% end %>
-    <% end %>
 
-  </div>    
+      <% if current_user.has_role?('admin') %>
+        <div class="well">
+          <%= form_for @user, url: {action: "update_roles"},  html: {id: "edit_user_roles"} do |f| %>
+            <div>
+              <%= f.collection_check_boxes :roles, Role.all, :id, :humanized_name, {checked: @user.roles.map(&:to_param), include_hidden: false } do |b| %>
+                <div>
+                  <%= b.check_box({'data-toggle':"toggle", "data-onstyle":"danger", "data-on":"Enabled", "data-off":"Disabled"}) %>
+                  <%= b.label %>
+                </div>
+              <% end %>
+            </div>
+            <%= f.submit "Update Roles", class: "btn btn-danger btn-block" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>    
+  </div>
 </div>

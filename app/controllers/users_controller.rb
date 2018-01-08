@@ -18,10 +18,13 @@ class UsersController < ApplicationController
   def update_roles
     @user = User.find(params[:id])
     authorize @user
-    binding.pry
     UserRoleAssignment.where(user_id: @user.id).destroy_all
     params[:user][:roles].each do |role|
-      UserRoleAssignment.deleted.where(user_id: @user.id, role_id: Role.find(role).id).first.restore
+      if r = UserRoleAssignment.deleted.where(user_id: @user.id, role_id: Role.find(role).id).first
+        r.restore
+      else
+        UserRoleAssignment.new(user_id: @user.id, role_id: Role.find(role).id).save!
+      end
     end
       flash[:alert] = "User Roles Updated"
       redirect_to user_path(@user)

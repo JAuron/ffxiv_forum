@@ -8,7 +8,7 @@
           <th width="30%" class="section">Roles</th>
           <th width="20%" class="section">Joined</th>
           <th width="10%" class="section"># Posts</th>
-          <th width="10%" class="section"></th>
+          <th width="10%" class="section" colspan="2"></th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +23,7 @@
             <td><%= time_formatter(user.created_at) %></td>
               
             <td><%= Post.where(user_id: user.id).count %></td>
+            <td><%= link_to "Edit Roles", edit_user_path(user), class: "btn btn-danger btn-xs" %></td>     
             <td><%= link_to "Destroy", user, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-danger btn-xs" %></td>              
           </tr>
         <% end %>

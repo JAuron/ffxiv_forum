@@ -41,6 +41,10 @@ $btn-danger-bg: #E34C35;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.toggle.btn{
+  margin: 10px
+}
+
 .navbar-default .navbar-nav > li > a.no-pad {
   padding-top: 0px;
   padding-bottom: 0px;

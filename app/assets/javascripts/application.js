@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require trix
-//= require bootstrap
 //= require bootstrap-toggle
+//= require bootstrap
 //= require best_in_place
 //= require select2
 //= require turbolinks
