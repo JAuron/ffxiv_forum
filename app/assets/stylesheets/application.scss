@@ -63,6 +63,10 @@ img.header {
   margin: auto;
 }
 
+trix-editor.full-form {
+  height: -webkit-fill-available;
+}
+
 .well.flash{
     margin: 20px;
     border: 1px solid #E34C35;
@@ -70,6 +74,10 @@ img.header {
     background: #323232;
     font-weight: bold;
     text-align: center;
+}
+
+.well.subwell{
+  background: #404040;
 }
 
 /*TOPIC VIEW PAGE*/
@@ -181,6 +189,10 @@ img.avatar {
 .panel-body.userdata {
   padding-top: 30px;
   padding-bottom: 0px;
+}
+
+.padding-bottom{
+  padding-bottom: 15px;
 }
 
 dd {

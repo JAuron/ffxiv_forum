@@ -15,6 +15,8 @@
 
 class Role < ApplicationRecord
 	acts_as_paranoid
+
+	before_destroy :destroy_user_role_assignments
 	
 	has_many :user_role_assignments
   has_many :users, through: :user_role_assignments
@@ -23,5 +25,11 @@ class Role < ApplicationRecord
 
 	def humanized_name
     "#{name.humanize}"
+  end
+
+  private
+  
+  def destroy_user_role_assignments
+  	self.user_role_assignments.destroy_all
   end
 end

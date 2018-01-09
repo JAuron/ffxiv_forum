@@ -1,12 +1,19 @@
+<head>
+  <script type="text/javascript">
+    $(document).on('turbolinks:load', function(){
+      $('input[type="checkbox"].toggle').bootstrapToggle();
+    });
+  </script>
+</head>
 <div class="container ">
-  <h1>Edit Details</h1>
+  <h1>Edit User Details</h1>
   <div class="container well form">
     <div class="text-center">
-      <%= image_tag @user.lodestone.portrait, class: 'col-lg-6', align: 'center' %>
+      <%= image_tag @user.lodestone.portrait, class: 'col-lg-6 padding-bottom', align: 'center' %>
     </div>
     <div class="col-lg-6">
       <% if @user == current_user %>
-        <div class="well">
+        <div class="well subwell">
           <%= form_for @user, url: {action: "update_password"},  html: {id: "edit_user_password"} do |f| %>
             <div class="form-group">
               <label for="email">Email address</label>
@@ -30,7 +37,7 @@
       <% end %>
 
       <% if current_user.has_role?('admin') %>
-        <div class="well">
+        <div class="well subwell">
           <%= form_for @user, url: {action: "update_roles"},  html: {id: "edit_user_roles"} do |f| %>
             <div>
               <%= f.collection_check_boxes :roles, Role.all, :id, :humanized_name, {checked: @user.roles.map(&:to_param), include_hidden: false } do |b| %>

@@ -19,3 +19,7 @@
 //= require select2
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function () {
+  $('input[type=checkbox][data-toggle^=toggle]').bootstrapToggle()
+})

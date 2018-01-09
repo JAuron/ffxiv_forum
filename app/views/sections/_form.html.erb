@@ -1,4 +1,6 @@
-<div id="reply" class="panel-body topic">
+<div class="container">
+  <head><h1>New Section</h1></head>
+	<div id="reply" class="panel-body topic">
   <section class="well reply">
 		<%= form_for @section, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
 	    <% if params[:section] %>
@@ -8,4 +10,5 @@
 	    <%= f.submit "Submit", class: "btn btn-info pull-right" %>
 	  <% end %>
   </section>
+</div>
 </div>

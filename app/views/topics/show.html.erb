@@ -40,7 +40,7 @@
           <div class="panel-footer post">
             <% if current_user&.has_role?("admin") || current_user == post.user%>
               <section align="right">
-                <%= link_to "Edit", edit_post_path(post), class: "btn btn-info btn-xs" %> 
+                <%= link_to("Edit", edit_post_path(post), class: "btn btn-info btn-xs") if post.user == current_user%>
                 <%= link_to "Delete", post, data: {confirm: 'Are you sure?'}, :method => :delete, class: "btn btn-info btn-xs"%>
               </section>
             <% end %>

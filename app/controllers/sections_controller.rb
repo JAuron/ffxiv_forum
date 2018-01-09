@@ -32,6 +32,7 @@ class SectionsController < ApplicationController
 
 	def new
 		@section = Section.new
+		authorize @section
 	end
 
 	def create
