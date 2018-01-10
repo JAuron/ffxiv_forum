@@ -62,8 +62,8 @@ class Lodestone < ApplicationRecord
 		metadata[:gender] = data["gender"]
 		metadata[:race] = data["race"]
 		metadata[:clan] = data["clan"]
-		metadata[:guardian] = {name: data["guardian"]["name"], icon: data["guardian"]["icon"]}
-		metadata[:grand_company] = {name: data["grand_company"]["name"], icon: data["grand_company"]["icon"], rank: data["grand_company"]["rank"]}
+		metadata[:guardian] = {name: data.dig("guardian", "name"), icon: data.dig("guardian", "icon")}
+		metadata[:grand_company] = {name: data.dig("grand_company", "name"), icon: data.dig("grand_company", "icon"), rank: data.dig("grand_company", "rank")}
 		write_attribute(:metadata, metadata.to_json)
 	end
 

@@ -7,7 +7,7 @@
         <div class="panel-body userdata">
           <%= image_tag @lodestone_data.portrait, class: 'col-lg-4 avatar', align: 'center' %>
           <div class="panel col-lg-6">
-            <h4><%= @lodestone_data.name %> - <%= @metadata['title'] %></h4>
+            <h4><%= @lodestone_data.name %> - <%= @metadata['title'] ?  @metadata['title'] : "New Character" %></h4>
           </div>
           <% if current_user == @user %>
             <div class="panel col-lg-2">
@@ -33,8 +33,10 @@
                   <dt>Clan:</dt> 
                   <dd><%= @metadata['clan'] %></dd>
                   <br/>
-                  <dt>Grand Company Rank:</dt> 
-                  <dd><%= image_tag @metadata['grand_company']['icon'], size: 25 %> <%= @metadata['grand_company']['rank'] %></dd>
+                  <% if @metadata['grand_company']['rank'] %>
+                    <dt>Grand Company Rank:</dt> 
+                    <dd><%= image_tag @metadata['grand_company']['icon'], size: 25 %> <%= @metadata['grand_company']['rank'] %></dd>
+                  <% end %>
                   <dt>Guardian:</dt> 
                   <dd><%= image_tag @metadata['guardian']['icon'], size: 25 %> <%= @metadata['guardian']['name'] %></dd>
                 </dl>

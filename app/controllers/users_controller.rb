@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    authorize User
   end
 
   def edit

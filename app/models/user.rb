@@ -17,6 +17,9 @@
 
 class User < ApplicationRecord
   acts_as_paranoid
+
+  before_destroy :destroy_lodestone
+  before_restore :restore_lodestone
   
 	has_secure_password
 	has_many :topics
@@ -32,5 +35,15 @@ class User < ApplicationRecord
   def has_role?(*role_names)
     self.roles.where(:name => role_names).present?
   end
+
+  private
+
+ def destroy_lodestone
+   self.lodestone.destroy
+ end
+
+ def restore_lodestone
+   Lodestone.deleted.find(self.lodestone_id).restore
+ end
 
 end
