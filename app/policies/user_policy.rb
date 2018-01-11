@@ -9,6 +9,10 @@ class UserPolicy < ApplicationPolicy
   	true
   end
 
+  def update?
+    @user == @record or admin?
+  end
+
   def update_password?
   	@user == @record
   end

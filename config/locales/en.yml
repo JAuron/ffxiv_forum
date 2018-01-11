@@ -36,3 +36,10 @@ en:
     post_policy:
       update?: 'You cannot edit this post'
       create?: 'You cannot create posts'
+    section_policy:
+      update?: 'You cannot edit a section'
+      create?: 'You cannot create new sections'
+    topic_policy:
+      update?: 'You cannot edit topics'
+      create?: 'You cannot create new topics'
+    

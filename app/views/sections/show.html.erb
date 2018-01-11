@@ -54,9 +54,7 @@
       <div class="panel-heading section">
         <div class="row">
           <h4 class="h4 section">Topics
-            <% if current_user&.has_role?("admin")%>
-              <a class="btn btn-info pull-right" href=<%= new_topic_path(section: params[:id]) %> role="button">New Topic</a>
-            <% end %>
+            <a class="btn btn-info pull-right" href=<%= new_topic_path(section: params[:id]) %> role="button">New Topic</a>
           </h4>
         </div>
       </div>
