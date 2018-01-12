@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  require "net/http"
 
   after_action :verify_authorized
 
