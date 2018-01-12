@@ -27,9 +27,9 @@ Things you may want to cover:
 TO DO LIST
 
 Front Page Layout
-Add/Change User Roles
-Change Password
-SOFT DELETION
+Fix User Roles on live site
+Add daily task for updating class data (or should it be weekly? :S)
+LOGGING
 
 
 STRUCTURE
